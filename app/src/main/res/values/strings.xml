@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Mora Scorpions</string>
+    <string name="title_activity_student">StudentActivity</string>
+    <string name="title_activity_teacher">TeacherActivity</string>
+    <string name="title_activity_principal">PrincipalActivity</string>
+    <string name="title_activity_parent">ParentActivity</string>
+
+    <string-array name="teacherActions">
+        <item>Home</item>
+        <item>Mark Attendance</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
