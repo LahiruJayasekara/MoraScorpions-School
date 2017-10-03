@@ -1,9 +1,7 @@
 package com.mlpj.www.morascorpions;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +10,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class TeacherActivity extends AppCompatActivity {
 
@@ -20,6 +17,7 @@ public class TeacherActivity extends AppCompatActivity {
     UserLocalStore userLocalStore;
     private  String [] actions;
     private ListView lvTeacherActions;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +25,7 @@ public class TeacherActivity extends AppCompatActivity {
 
         //tvText = (TextView) findViewById(R.id.tvText);
         userLocalStore = new UserLocalStore(this);
+        User user = userLocalStore.getUserDetails();
         actions = getResources().getStringArray(R.array.teacherActions);
         lvTeacherActions = (ListView)findViewById(R.id.lvTeacherActions);
 
@@ -37,14 +36,7 @@ public class TeacherActivity extends AppCompatActivity {
         lvTeacherActions.setAdapter(adapter);
         lvTeacherActions.setOnItemClickListener(new DrawerItemClickListener());
 
-        Intent intent = getIntent();
-        User user = (User)intent.getSerializableExtra("user");
-
-
-
         setTitle("Hi " + user.name);
-
-        //tvText.setText("You are logged in as a Teacher");
 
 
 
@@ -78,19 +70,22 @@ public class TeacherActivity extends AppCompatActivity {
     }
 
     public void selectItem(int position){
-        Fragment fragment;
+
         switch (position){
             case 1:
-                fragment = new MarkAttendanceFragment();
+                setTitle("Mark Attendance");
+                switchView(SelectDateActivity.class);
                 break;
             default:
-                fragment = new HomeFragment();
+                setTitle("Hi " + user.name);
         }
+        DrawerLayout drawerLayout =(DrawerLayout)findViewById(R.id.teacherDrawerLayout);
+        drawerLayout.closeDrawer(lvTeacherActions);
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.teacherContentFrame,fragment);
-        ft.addToBackStack(null);
-        ft.commit();
+    }
 
+    public void switchView(Class context){
+        Intent intent = new Intent(this,context);
+        startActivity(intent);
     }
 }

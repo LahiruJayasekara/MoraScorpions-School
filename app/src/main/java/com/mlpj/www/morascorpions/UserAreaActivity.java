@@ -24,12 +24,19 @@ public class UserAreaActivity extends AppCompatActivity {
         tvClassName = (TextView)findViewById(R.id.tvClassName);
         tvAdmitionDate = (TextView)findViewById(R.id.tvAdmitionDate);
         userLocalStore = new UserLocalStore(this);
-
+/*
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         String userType = intent.getStringExtra("userType");
         String className = intent.getStringExtra("className");
         String admitionDate = intent.getStringExtra("admitionDate");
+        String role = "", text;
+*/
+        User user = userLocalStore.getUserDetails();
+        String name = user.name;
+        String userType = user.userType;
+        String className = user.className;
+        String admitionDate = user.admitionDate;
         String role = "", text;
 
         switch (userType){
