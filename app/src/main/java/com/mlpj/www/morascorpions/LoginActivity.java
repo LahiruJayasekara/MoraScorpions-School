@@ -1,6 +1,5 @@
 package com.mlpj.www.morascorpions;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -44,32 +42,16 @@ public class LoginActivity extends AppCompatActivity {
 
         if(userLocalStore.getUserLoggedIn() == true){
             user = userLocalStore.getUserDetails();
-            Intent intent = new Intent(this,UserAreaActivity.class);
-            intent.putExtra("name",user.name);
-            intent.putExtra("userType",user.userType);
-            intent.putExtra("className",user.className);
-            intent.putExtra("admitionDate",user.admitionDate);
-            startActivity(intent);
-            finish();
+            switchUser(user.userType);
         }
-
-
-
     }
 
     public void onClickLogIn(View view){
 
-
+        Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_LONG).show();
         final String email = etEmail.getText().toString();
         final String password = etPassword.getText().toString();
 
-        JSONObject js = new JSONObject();
-        try {
-            js.put("email",email);
-            js.put("password",password);
-        }catch(JSONException e){
-
-        }
 
         if(email.equals("")){
             etEmail.setError("Can't be empty");
@@ -77,50 +59,39 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.setError("Can't be empty");
         }
         else{
+
+            JSONObject js = new JSONObject();
+            try {
+                js.put("email",email);
+                js.put("password",password);
+            }catch(JSONException e){
+
+            }
+
+            String url = "http://10.0.2.2:49375/user/login/";
+
             Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>(){
+
                 @Override
                 public void onResponse(JSONObject jsonResponse) {
-
+                    Toast.makeText(getBaseContext(), "Login Success", Toast.LENGTH_LONG).show();
+                    JSONObject abc = jsonResponse;
                     try {
-                        //Toast.makeText(getBaseContext(), response, Toast.LENGTH_LONG).show();
-                        //JSONObject jsonResponse = new JSONObject(response);
                         boolean success = jsonResponse.getBoolean("success");
+
+                        String name = jsonResponse.getString("name");
+                        String userType = jsonResponse.getString("userType").toString();
+                        String className = jsonResponse.getString("className").toString();
+                        String admitionDate = jsonResponse.getString("admitionDate").toString();
 
                         if(success){
 
-                            String name = jsonResponse.getString("name");
-                            String userType = jsonResponse.getString("userType");
-                            String className = jsonResponse.getString("className");
-                            String admitionDate = jsonResponse.getString("admitionDate");
 
                             user = new User(name,userType,className,admitionDate);
-
                             userLocalStore.setUserLoggedIn(true);
                             userLocalStore.setUserDetails(user);
 
-                            String role = "", text;
-
-                            switch (userType){
-                                case "s":
-                                    role = "student";
-                                    break;
-                                case "pa":
-                                    role = "parent";
-                                    break;
-                                case "pr":
-                                    role = "principal";
-                                    break;
-                                case "t":
-                                    role = "teacher";
-                                    switchUser(TeacherActivity.class);
-
-                                    break;
-                                case "a":
-                                    role = "admin";
-                                    break;
-                            }
-
-                           // Intent intent = new Intent(LoginActivity.this, UserAreaActivity.class);
+                            switchUser(userType);
 
 
                         }else{
@@ -133,14 +104,14 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     } catch (JSONException e) {
 
-
+                        Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
 
                 }
             };
 
-            LoginRequest loginRequest = new LoginRequest(email, password, js, responseListener);
+            VolleyPostJsonObjectRequest loginRequest = new VolleyPostJsonObjectRequest(js, url, responseListener);
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             queue.add(loginRequest);
         }
@@ -148,11 +119,23 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void switchUser(Class context){
+    public void switchUser(String userType){
+        Class context = UserAreaActivity.class;
+        switch (userType){
+            case "s":
+                break;
+            case "pa":
+                break;
+            case "pr":
+                break;
+            case "t":
+                Toast.makeText(getBaseContext(), "Teacher", Toast.LENGTH_LONG).show();
+                context = TeacherActivity.class;
+                break;
+        }
+
         Intent intent = new Intent(this,context);
-        intent.putExtra("user",user);
         startActivity(intent);
         finish();
-
     }
 }

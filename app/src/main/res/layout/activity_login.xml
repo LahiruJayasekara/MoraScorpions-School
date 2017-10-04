@@ -24,7 +24,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="pavithra@abc.com"
+        android:text="lahiru@abc.com"
         android:id="@+id/etEmail"
         android:inputType="textEmailAddress"
         />
