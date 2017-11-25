@@ -9,13 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Retrofit;
@@ -37,14 +30,12 @@ public class LoginActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.etPassword);
         bLogIn = (Button)findViewById(R.id.bLogIn);
 
-
         userLocalStore = new UserLocalStore(this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
 
         if(userLocalStore.getUserLoggedIn() == true){
             user = userLocalStore.getUserDetails();
@@ -53,7 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickLogIn(View view){
-
         Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_LONG).show();
         final String email = etEmail.getText().toString();
         final String password = etPassword.getText().toString();

@@ -10,16 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -40,7 +31,6 @@ public class MarkAttendanceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mark_attendance);
-
 
         listView = (ListView) findViewById(R.id.lvAttendance);
 
@@ -75,11 +65,8 @@ public class MarkAttendanceActivity extends AppCompatActivity {
                 attendanceDetail.present = !attendanceDetail.present;
                 ((AttendanceDetail) attendanceDetails.get(position)).present =attendanceDetail.present;
                 adapter.notifyDataSetChanged();
-
-
             }
         });
-
     }
 
     public void onMarkAttendance(View view){
@@ -116,43 +103,6 @@ public class MarkAttendanceActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-
-
-/*
-        String txt = "";
-        JSONArray ja = new JSONArray();
-        for(int i = 0; i <attendanceDetails.size(); i++){
-            AttendanceDetail row = (AttendanceDetail)attendanceDetails.get(i);
-            txt += row.name + " " +row.present + " ";
-            try {
-                JSONObject jo = new JSONObject();
-                jo.put("date", row.date);
-                jo.put("present", row.present);
-                jo.put("studentId", row.studentId);
-                ja.put(jo);
-            }catch (JSONException e){
-                Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-
-        }
-        //Toast.makeText(getBaseContext(), ja.toString(), Toast.LENGTH_SHORT).show();
-        Log.d("JSON", ja.toString());
-
-        String url = "http://10.0.2.2:49375/user/markattendance/";
-
-        Response.Listener<JSONArray> responseListener = new Response.Listener<JSONArray>(){
-
-            @Override
-            public void onResponse(JSONArray jsonResponse) {
-                Toast.makeText(getBaseContext(), "Success", Toast.LENGTH_LONG).show();
-            }
-        };
-
-        VolleyPostJsonArrayRequest markAttendanceRequest = new VolleyPostJsonArrayRequest(ja, url, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(MarkAttendanceActivity.this);
-        queue.add(markAttendanceRequest);
-*/
     }
 
 }

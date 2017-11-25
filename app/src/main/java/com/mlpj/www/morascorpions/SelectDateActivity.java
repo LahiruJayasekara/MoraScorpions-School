@@ -11,14 +11,6 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -48,10 +40,7 @@ public class SelectDateActivity extends AppCompatActivity {
         day = calendar.get(Calendar.DAY_OF_MONTH);
 
         datePicker.init(year,month,day,null);
-
     }
-
-
 
     public void onSelectDate(View view){
         String date = datePicker.getYear() + "/" + (datePicker.getMonth()+1) + "/" + datePicker.getDayOfMonth();
@@ -88,67 +77,6 @@ public class SelectDateActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
-
-
-
-
-
-/*
-        JSONObject js = new JSONObject();
-        try {
-            js.put("className",user.className);
-            js.put("date", date);
-
-        }catch(JSONException e){
-            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-
-        String url = "http://10.0.2.2:49375/user/getAttendanceSheet/";
-
-        try {
-            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject jsonResponse) {
-                    //Toast.makeText(getBaseContext(), jsonResponse.toString(), Toast.LENGTH_LONG).show();
-               try {
-
-                    //boolean success = jsonResponse.getBoolean("success");
-                   JSONArray ja = jsonResponse.getJSONArray("attendanceList");
-                   attendanceDetails = new ArrayList();
-                   for(int i = 0; i < ja.length(); i++){
-                       JSONObject js = ja.getJSONObject(i);
-                       attendanceDetails.add(new AttendanceDetail(js.getInt("studentId"), js.getString("name"), js.getBoolean("present"), js.getString("date")));
-
-                       Toast.makeText(getBaseContext(), js.toString(), Toast.LENGTH_LONG).show();
-
-                   }
-
-                   Intent intent = new Intent(getBaseContext(),MarkAttendanceActivity.class);
-                   intent.putExtra("attendanceDetails",attendanceDetails);
-                   startActivity(intent);
-
-
-                } catch (JSONException e) {
-
-                    Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-                    e.printStackTrace();
-                }
-
-                }
-            };
-
-        VolleyPostJsonObjectRequest attendanceSheetRequest = new VolleyPostJsonObjectRequest(js, url, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(SelectDateActivity.this);
-        queue.add(attendanceSheetRequest);
-
-        }catch (Exception e){
-            Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-            e.printStackTrace();
-        }
-*/
-
     }
 
 }
