@@ -11,13 +11,19 @@ public class AttendanceDetail implements Serializable{
 
     int studentId;
     public String name;
-    boolean checked;
+    boolean present;
     String date;
 
-    AttendanceDetail(int studentId, String name, boolean checked, String date) {
+    public AttendanceDetail(int studentId, boolean present, String date) {
+        this.studentId = studentId;
+        this.present = present;
+        this.date = date;
+    }
+
+    AttendanceDetail(int studentId, String name, boolean present, String date) {
         this.studentId = studentId;
         this.name = name;
-        this.checked = checked;
+        this.present = present;
         this.date = date;
     }
 }

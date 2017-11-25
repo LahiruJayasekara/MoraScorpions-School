@@ -20,7 +20,8 @@
         <activity android:name=".UserAreaActivity" />
         <activity android:name=".TeacherActivity" />
         <activity android:name=".SelectDateActivity" />
-        <activity android:name=".MarkAttendanceActivity"></activity>
+        <activity android:name=".MarkAttendanceActivity" />
+        <activity android:name=".ChatActivity"></activity>
     </application>
 
 </manifest>

@@ -68,7 +68,7 @@ public class CustomAdapter extends ArrayAdapter {
 
 
         viewHolder.tvName.setText(item.name);
-        viewHolder.checkBox.setChecked(item.checked);
+        viewHolder.checkBox.setChecked(item.present);
 
 
         return result;

@@ -8,6 +8,7 @@
     <string-array name="teacherActions">
         <item>Home</item>
         <item>Mark Attendance</item>
+        <item>Instant Messaging to Parents</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

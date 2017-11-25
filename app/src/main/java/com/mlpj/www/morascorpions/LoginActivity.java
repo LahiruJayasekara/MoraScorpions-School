@@ -16,6 +16,11 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class LoginActivity extends AppCompatActivity {
 
     User user;
@@ -40,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+
         if(userLocalStore.getUserLoggedIn() == true){
             user = userLocalStore.getUserDetails();
             switchUser(user.userType);
@@ -51,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_LONG).show();
         final String email = etEmail.getText().toString();
         final String password = etPassword.getText().toString();
-
+        User newUser = new User(email,password);
 
         if(email.equals("")){
             etEmail.setError("Can't be empty");
@@ -60,60 +66,47 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
 
-            JSONObject js = new JSONObject();
-            try {
-                js.put("email",email);
-                js.put("password",password);
-            }catch(JSONException e){
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    .baseUrl("http://10.0.2.2:49375/user/")
+                    .addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit = builder.build();
 
-            }
+            ApiClient client = retrofit.create(ApiClient.class);
+            Call<User> call = client.login(newUser);
 
-            String url = "http://10.0.2.2:49375/user/login/";
-
-            Response.Listener<JSONObject> responseListener = new Response.Listener<JSONObject>(){
-
+            call.enqueue(new Callback<User>() {
                 @Override
-                public void onResponse(JSONObject jsonResponse) {
-                    Toast.makeText(getBaseContext(), "Login Success", Toast.LENGTH_LONG).show();
-                    JSONObject abc = jsonResponse;
-                    try {
-                        boolean success = jsonResponse.getBoolean("success");
+                public void onResponse(Call<User> call, retrofit2.Response<User> response) {
 
-                        String name = jsonResponse.getString("name");
-                        String userType = jsonResponse.getString("userType").toString();
-                        String className = jsonResponse.getString("className").toString();
-                        String admitionDate = jsonResponse.getString("admitionDate").toString();
+                    Toast.makeText(getBaseContext(), "Login Success", Toast.LENGTH_LONG).show();
+
+                        boolean success = response.body().isSuccess();
+
+                        String name = response.body().getName();
+                        String userType = response.body().getUserType();
+                        String className = response.body().getClassName();
+                        String admitionDate = response.body().getAdmitionDate();
 
                         if(success){
-
-
                             user = new User(name,userType,className,admitionDate);
                             userLocalStore.setUserLoggedIn(true);
                             userLocalStore.setUserDetails(user);
 
                             switchUser(userType);
-
-
                         }else{
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Login failed")
                                     .setNegativeButton("Retry",null)
                                     .create()
                                     .show();
-
                         }
-                    } catch (JSONException e) {
-
-                        Toast.makeText(getBaseContext(), e.toString(), Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
-
                 }
-            };
 
-            VolleyPostJsonObjectRequest loginRequest = new VolleyPostJsonObjectRequest(js, url, responseListener);
-            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-            queue.add(loginRequest);
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this,"Not Successful",Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
 

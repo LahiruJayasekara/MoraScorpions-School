@@ -76,6 +76,9 @@ public class TeacherActivity extends AppCompatActivity {
                 setTitle("Mark Attendance");
                 switchView(SelectDateActivity.class);
                 break;
+            case 2:
+                switchView(ChatActivity.class);
+                break;
             default:
                 setTitle("Hi " + user.name);
         }
