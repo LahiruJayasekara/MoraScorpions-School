@@ -1,10 +1,8 @@
 package com.mlpj.www.morascorpions;
 
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -23,7 +21,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
 
     ArrayList attendanceDetails;
     ListView listView;
-    private CustomAdapter adapter;
+    private CustomAdapterAttendanceSheet adapter;
     ArrayList<AttendanceDetail> markedList;
 
 
@@ -54,7 +52,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
         attendanceDetails.add(new AttendanceDetail(13,"Marshmallow", false));
         attendanceDetails.add(new AttendanceDetail(14,"Nougat", false));
 */
-        adapter = new CustomAdapter(attendanceDetails, getApplicationContext());
+        adapter = new CustomAdapterAttendanceSheet(attendanceDetails, getApplicationContext());
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

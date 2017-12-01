@@ -1,5 +1,6 @@
 package com.mlpj.www.morascorpions;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
 import android.widget.Toast;
 
 import retrofit2.Call;
@@ -20,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText etEmail, etPassword;
     Button bLogIn;
     UserLocalStore userLocalStore;
-
+    ProgressDialog mProgressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClickLogIn(View view){
-        Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_LONG).show();
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setTitle("Logging In...");
+        mProgressDialog.setMessage("Please wait for the Authentication!");
+        mProgressDialog.show();
         final String email = etEmail.getText().toString();
         final String password = etPassword.getText().toString();
         User newUser = new User(email,password);
@@ -68,17 +73,18 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<User> call, retrofit2.Response<User> response) {
 
-                    Toast.makeText(getBaseContext(), "Login Success", Toast.LENGTH_LONG).show();
+                    mProgressDialog.dismiss();
 
                         boolean success = response.body().isSuccess();
 
+                        int userId = response.body().getId();
                         String name = response.body().getName();
                         String userType = response.body().getUserType();
                         String className = response.body().getClassName();
                         String admitionDate = response.body().getAdmitionDate();
 
                         if(success){
-                            user = new User(name,userType,className,admitionDate);
+                            user = new User(userId,name,userType,className,admitionDate);
                             userLocalStore.setUserLoggedIn(true);
                             userLocalStore.setUserDetails(user);
 
@@ -94,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
+                    mProgressDialog.dismiss();
                     Toast.makeText(LoginActivity.this,"Not Successful",Toast.LENGTH_LONG).show();
                 }
             });

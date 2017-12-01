@@ -8,19 +8,7 @@ import java.io.Serializable;
  */
 
 public class User implements Serializable{
-    public User(String name, String userType, String className, String admitionDate){
-        this.name = name;
-        this.userType = userType;
-        this.className = className;
-        this.admitionDate = admitionDate;
-    }
-
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
-
+    public int id;
     public String email;
     public String password;
     public String name;
@@ -29,9 +17,22 @@ public class User implements Serializable{
     public String admitionDate;
     public boolean success;
 
-    public String getEmail() {
-        return email;
+    public User(int userId, String name, String userType, String className, String admitionDate){
+        this.id = userId;
+        this.name = name;
+        this.userType = userType;
+        this.className = className;
+        this.admitionDate = admitionDate;
     }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public int getId() {return id;}
+
+    public String getEmail() {return email;}
 
     public String getPassword() {
         return password;

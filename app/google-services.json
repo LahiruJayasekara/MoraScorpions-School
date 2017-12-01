@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "134643859693",
+    "firebase_url": "https://morascorpionschat.firebaseio.com",
+    "project_id": "morascorpionschat",
+    "storage_bucket": "morascorpionschat.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134643859693:android:8d4d35ad13acca08",
+        "android_client_info": {
+          "package_name": "com.mlpj.www.morascorpions"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134643859693-8fs59s4978jp8sudkj345bde7ij0hv0r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mlpj.www.morascorpions",
+            "certificate_hash": "045d9848eb88cb3463e80c1b58dc42210a4aa268"
+          }
+        },
+        {
+          "client_id": "134643859693-n2arktv3a7oehv5nr4ct13i5vjf4fe6e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1tVuYgFiP5Vkzaels6ZFchFu6_yUGi9E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134643859693-n2arktv3a7oehv5nr4ct13i5vjf4fe6e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

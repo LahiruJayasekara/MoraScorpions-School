@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class CustomAdapter extends ArrayAdapter {
+public class CustomAdapterAttendanceSheet extends ArrayAdapter {
 
     private ArrayList dataSet;
     Context mContext;
@@ -27,7 +27,7 @@ public class CustomAdapter extends ArrayAdapter {
         CheckBox checkBox;
     }
 
-    public CustomAdapter(ArrayList data, Context context) {
+    public CustomAdapterAttendanceSheet(ArrayList data, Context context) {
         super(context, R.layout.attendance_row, data);
         this.dataSet = data;
         this.mContext = context;

@@ -77,7 +77,7 @@ public class TeacherActivity extends AppCompatActivity {
                 switchView(SelectDateActivity.class);
                 break;
             case 2:
-                switchView(ChatActivity.class);
+                switchView(ChatListActivity.class);
                 break;
             default:
                 setTitle("Hi " + user.name);
