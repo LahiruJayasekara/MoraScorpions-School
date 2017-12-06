@@ -41,7 +41,10 @@ public class LoginActivity extends AppCompatActivity {
 
         if(userLocalStore.getUserLoggedIn() == true){
             user = userLocalStore.getUserDetails();
-            switchUser(user.userType);
+            //switchUser(user.userType);
+            Intent intent = new Intent(this, UserAreaActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -88,7 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                             userLocalStore.setUserLoggedIn(true);
                             userLocalStore.setUserDetails(user);
 
-                            switchUser(userType);
+                            //switchUser(userType);
+                            Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);
+                            startActivity(intent);
+                            finish();
                         }else{
                             AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
                             builder.setMessage("Login failed")
@@ -108,7 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-
+/*
     public void switchUser(String userType){
         Class context = UserAreaActivity.class;
         switch (userType){
@@ -128,4 +134,5 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+*/
 }

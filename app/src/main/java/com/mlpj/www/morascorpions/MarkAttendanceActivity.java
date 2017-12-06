@@ -36,22 +36,7 @@ public class MarkAttendanceActivity extends AppCompatActivity {
         attendanceDetails = (ArrayList)intent.getSerializableExtra("attendanceDetails");
 
         //attendanceDetails = new ArrayList();
-/*
-        attendanceDetails.add(new AttendanceDetail(1,"Apple Pie", false));
-        attendanceDetails.add(new AttendanceDetail(2,"Banana Bread", false));
-        attendanceDetails.add(new AttendanceDetail(3,"Cupcake", false));
-        attendanceDetails.add(new AttendanceDetail(4,"Donut", true));
-        attendanceDetails.add(new AttendanceDetail(5,"Eclair", true));
-        attendanceDetails.add(new AttendanceDetail(6,"Froyo", true));
-        attendanceDetails.add(new AttendanceDetail(7,"Gingerbread", true));
-        attendanceDetails.add(new AttendanceDetail(8,"Honeycomb", false));
-        attendanceDetails.add(new AttendanceDetail(9,"Ice Cream Sandwich", false));
-        attendanceDetails.add(new AttendanceDetail(10,"Jelly Bean", false));
-        attendanceDetails.add(new AttendanceDetail(11,"Kitkat", false));
-        attendanceDetails.add(new AttendanceDetail(12,"Lollipop", false));
-        attendanceDetails.add(new AttendanceDetail(13,"Marshmallow", false));
-        attendanceDetails.add(new AttendanceDetail(14,"Nougat", false));
-*/
+
         adapter = new CustomAdapterAttendanceSheet(attendanceDetails, getApplicationContext());
 
         listView.setAdapter(adapter);

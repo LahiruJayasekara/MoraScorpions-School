@@ -4,6 +4,8 @@
     <string name="title_activity_teacher">TeacherActivity</string>
     <string name="title_activity_principal">PrincipalActivity</string>
     <string name="title_activity_parent">ParentActivity</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <string-array name="teacherActions">
         <item>Home</item>
@@ -14,4 +16,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_message">Enter Message...</string>
+    <string name="parent_home">Parent Home</string>
+    <string name="parent_send">Parent Send</string>
+    <string name="mark_attendance">Mark Attendance</string>
+    <string name="select_date">Select date</string>
+    <string name="instant_chat_with_parents">Instant chat with Parents</string>
 </resources>

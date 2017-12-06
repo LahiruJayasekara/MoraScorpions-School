@@ -17,13 +17,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserAreaActivity" />
-        <activity android:name=".TeacherActivity" />
-        <activity android:name=".SelectDateActivity" />
         <activity android:name=".MarkAttendanceActivity" />
-        <activity android:name=".ChatListActivity" />
         <activity android:name=".ChatActivity" />
-        <activity android:name=".ParentActivity"></activity>
+        <activity android:name=".UserAreaActivity"></activity>
     </application>
 
 </manifest>
