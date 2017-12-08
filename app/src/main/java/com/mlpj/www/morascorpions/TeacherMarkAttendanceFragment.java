@@ -62,7 +62,8 @@ public class TeacherMarkAttendanceFragment extends Fragment {
                 OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder();
 
                 Retrofit.Builder builder = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:49375/user/")
+                        .baseUrl(getString(R.string.base_url_localhost))       //localhost
+                        //.baseUrl(getString(R.string.base_url_remote_localhost))    //remote localhost
                         .addConverterFactory(GsonConverterFactory.create())
                         .client(okHttpClientBuilder.build());
 

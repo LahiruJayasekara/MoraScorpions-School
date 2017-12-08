@@ -58,6 +58,7 @@
             android:layout_weight="1"
             android:background="@android:color/white"
             android:padding="10dp"
-            app:srcCompat="@drawable/ic_send_black" />
+            app:srcCompat="@drawable/ic_send_black"
+            />
     </LinearLayout>
 </RelativeLayout>

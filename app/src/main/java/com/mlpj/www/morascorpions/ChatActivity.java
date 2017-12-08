@@ -1,6 +1,7 @@
 package com.mlpj.www.morascorpions;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMessageItemsList = new ArrayList<>();
-        mMessageAdapter = new MessagesAdapter(mMessageItemsList);
+        mMessageAdapter = new MessagesAdapter(mMessageItemsList, this);
         mRecyclerView.setAdapter(mMessageAdapter);
 
         loadMessages();
@@ -75,6 +76,8 @@ public class ChatActivity extends AppCompatActivity {
 
 
     public void sendMessage(){
+        mImageBtnSend.setClickable(false);
+        mImageBtnSend.setBackgroundColor(Color.parseColor("#7f060026"));
         String message = mEtMessage.getText().toString();
         if(!TextUtils.isEmpty(message)){
             String senderRef = "messages/" + Integer.toString(mSenderId) + "/" + Integer.toString(mReceiverId);
@@ -103,6 +106,8 @@ public class ChatActivity extends AppCompatActivity {
                     }else{
                         mEtMessage.setText("");
                     }
+                    mImageBtnSend.setClickable(true);
+                    mImageBtnSend.setBackgroundColor(Color.parseColor("#ffffff"));
                 }
             });
         }
@@ -117,6 +122,7 @@ public class ChatActivity extends AppCompatActivity {
                         MessageItem message = dataSnapshot.getValue(MessageItem.class);
                         mMessageItemsList.add(message);
                         mMessageAdapter.notifyDataSetChanged();
+                        mRecyclerView.scrollToPosition(mMessageAdapter.getItemCount()-1);
                     }
 
                     @Override

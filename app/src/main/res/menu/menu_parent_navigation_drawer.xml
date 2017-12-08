@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/parentHome" android:title="Home Parent" android:icon="@drawable/ic_home_black"/>
-    <item android:id="@+id/parentSend" android:title="Send" android:icon="@drawable/ic_send_black"/>
+    <item android:id="@+id/parentChat" android:title="@string/instant_chat_with_teachers" android:icon="@drawable/ic_chat_black"/>
     <item android:id="@+id/parentAdd" android:title="Add" android:icon="@drawable/ic_add_black"/>
 </menu>

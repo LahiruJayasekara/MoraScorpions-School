@@ -28,8 +28,16 @@ public class TeacherChatFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         chatList = new ArrayList<>();
-        chatList.add(new ChatItem("Asiri", "Father of Hemal", 12));     //implement the code call API
-        chatList.add(new ChatItem("Athula", "Father of Lahiru", 13));
+        //implement the code call API
+
+        if(new UserLocalStore(getContext()).getUserDetails().getUserType().equals("t")){
+            chatList.add(new ChatItem("Asiri", "Father of Hemal", 7));
+            chatList.add(new ChatItem("Athula", "Father of Lahiru", 13));
+        }else{
+            chatList.add(new ChatItem("Pavithra", "Maths Teacher", 5));
+            chatList.add(new ChatItem("Piyumi", "IT Teacher", 8));
+        }
+
 
         chatAdapter = new ChatAdapter(chatList, getContext());
         recyclerView.setAdapter(chatAdapter);

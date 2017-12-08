@@ -61,9 +61,6 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.parentHome:
                         fragment = new ParentHomeFragment();
                         break;
-                    case R.id.parentSend:
-                        fragment = new ParentSendFragment();
-                        break;
                     case R.id.teacherHome:
                         fragment = new TeacherHomeFragment();
                         break;
@@ -71,6 +68,9 @@ public class UserAreaActivity extends AppCompatActivity {
                         fragment = new TeacherMarkAttendanceFragment();
                         break;
                     case R.id.teacherChat:
+                        fragment = new TeacherChatFragment();
+                        break;
+                    case R.id.parentChat:
                         fragment = new TeacherChatFragment();
                         break;
                 }
