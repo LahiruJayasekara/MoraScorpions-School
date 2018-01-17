@@ -1,6 +1,5 @@
 package com.mlpj.www.morascorpions;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,12 +29,12 @@ public class TeacherChatFragment extends Fragment {
         chatList = new ArrayList<>();
         //implement the code call API
 
-        if(new UserLocalStore(getContext()).getUserDetails().getUserType().equals("t")){
-            chatList.add(new ChatItem("Asiri", "Father of Hemal", 7));
-            chatList.add(new ChatItem("Athula", "Father of Lahiru", 13));
+        if(new UserLocalStore(getContext()).getUserDetails().getRoleName().equals("Teacher")){
+            chatList.add(new ChatItem("TKT Hansani", "Father of Hemal", "3c90d4ab-7a62-48a4-9f01-d217b9a7fae1"));
+            chatList.add(new ChatItem("Nimal Weerasinghe", "Father of Lahiru", "49f13909-48cb-49b4-9cf5-53b52eed0469"));
         }else{
-            chatList.add(new ChatItem("Pavithra", "Maths Teacher", 5));
-            chatList.add(new ChatItem("Piyumi", "IT Teacher", 8));
+            chatList.add(new ChatItem("Thathsarani", "Maths Teacher", "1f1c4de9-b42d-485c-b8f1-de28059aac36"));
+            chatList.add(new ChatItem("Madushika", "IT Teacher", "c7d8ada4-5b4c-40f8-ae51-6765cadaa3cc"));
         }
 
 

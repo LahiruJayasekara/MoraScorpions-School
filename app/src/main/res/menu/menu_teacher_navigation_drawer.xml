@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/teacherHome" android:title="Home Teacher" android:icon="@drawable/ic_home_black"/>
-    <item android:id="@+id/teacherMarkAttendance" android:title="@string/mark_attendance" android:icon="@drawable/ic_mark_attendance"/>
-    <item android:id="@+id/teacherChat" android:title="@string/instant_chat_with_parents" android:icon="@drawable/ic_chat_black"/>
+    <group>
+        <item android:id="@+id/teacherHome" android:title="Home Teacher" android:icon="@drawable/ic_home_black"/>
+        <item android:id="@+id/teacherProfile" android:title="@string/profile" android:icon="@drawable/ic_profile_black"/>
+        <item android:id="@+id/teacherMarkAttendance" android:title="@string/mark_attendance" android:icon="@drawable/ic_mark_attendance"/>
+        <item android:id="@+id/teacherChat" android:title="@string/instant_chat_with_parents" android:icon="@drawable/ic_chat_black"/>
+
+    </group>
+    <group android:id="@+id/teacherClassesGroup">
+        <item android:id="@+id/teacherClasses" android:title="Your Classes">
+            <menu>
+            </menu>
+        </item>
+    </group>
 </menu>

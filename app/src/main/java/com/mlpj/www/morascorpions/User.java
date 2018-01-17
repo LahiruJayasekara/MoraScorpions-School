@@ -8,21 +8,34 @@ import java.io.Serializable;
  */
 
 public class User implements Serializable{
-    public int id;
-    public String email;
-    public String password;
-    public String name;
-    public String userType;
-    public String className;
-    public String admitionDate;
-    public boolean success;
+    private String p_Id;
+    private String roleName;
+    private String name;
+    private String picUrl;
+    private String tpNumber;
+    private String email;
+    private String admissionNumber;
+    private String admissionDate;
+    private String teacherGrade;
+    private String principalGrade;
+    private String password;
+    private String studentId;
+    private String classRoomName;
 
-    public User(int userId, String name, String userType, String className, String admitionDate){
-        this.id = userId;
+
+    public User(String p_Id, String roleName, String name, String picUrl, String tpNumber, String email, String admissionNumber, String admissionDate, String teacherGrade, String principalGrade, String studentId, String classRoomName) {
+        this.p_Id = p_Id;
+        this.roleName = roleName;
         this.name = name;
-        this.userType = userType;
-        this.className = className;
-        this.admitionDate = admitionDate;
+        this.picUrl = picUrl;
+        this.tpNumber = tpNumber;
+        this.email = email;
+        this.admissionNumber = admissionNumber;
+        this.admissionDate = admissionDate;
+        this.teacherGrade = teacherGrade;
+        this.principalGrade = principalGrade;
+        this.studentId = studentId;
+        this.classRoomName = classRoomName;
     }
 
     public User(String email, String password) {
@@ -30,31 +43,56 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    public int getId() {return id;}
-
-    public String getEmail() {return email;}
-
-    public String getPassword() {
-        return password;
+    public String getP_Id() {
+        return p_Id;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
-    public String getAdmitionDate() {
-        return admitionDate;
-    }
-
-    public boolean isSuccess() {
-        return success;
+    public String getRoleName() {
+        return roleName;
     }
 
     public String getName() {
         return name;
     }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public String getTpNumber() {
+        return tpNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getAdmissionNumber() {
+        return admissionNumber;
+    }
+
+    public String getAdmissionDate() {
+        return admissionDate;
+    }
+
+    public String getTeacherGrade() {
+        return teacherGrade;
+    }
+
+    public String getPrincipalGrade() {
+        return principalGrade;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getStudentId() {
+        return studentId;
+    }
+
+    public String getClassRoomName() {
+        return classRoomName;
+    }
+
 }

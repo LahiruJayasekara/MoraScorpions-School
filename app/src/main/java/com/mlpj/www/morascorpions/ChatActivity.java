@@ -26,8 +26,8 @@ import java.util.Map;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private int mReceiverId;
-    private int mSenderId;
+    private String mReceiverId;
+    private String mSenderId;
     private String mReceiverName;
     private String mSenderName;
     private UserLocalStore mUserLocalStore;
@@ -44,10 +44,10 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
 
         Intent intent = getIntent();
-        mReceiverId = intent.getIntExtra("id",-1);
+        mReceiverId = intent.getStringExtra("id");
         mReceiverName = intent.getStringExtra("receiverName");
         mUserLocalStore = new UserLocalStore(this);
-        mSenderId = mUserLocalStore.getUserDetails().getId();
+        mSenderId = mUserLocalStore.getUserDetails().getP_Id();
         mSenderName = mUserLocalStore.getUserDetails().getName();
 
         Toast.makeText(this,"ttt " + mReceiverId + " " + mSenderId,Toast.LENGTH_LONG).show();
@@ -80,10 +80,10 @@ public class ChatActivity extends AppCompatActivity {
         mImageBtnSend.setBackgroundColor(Color.parseColor("#7f060026"));
         String message = mEtMessage.getText().toString();
         if(!TextUtils.isEmpty(message)){
-            String senderRef = "messages/" + Integer.toString(mSenderId) + "/" + Integer.toString(mReceiverId);
-            String receiverRef = "messages/" + Integer.toString(mReceiverId) + "/" + Integer.toString(mSenderId);
+            String senderRef = "messages/" + mSenderId + "/" + mReceiverId;
+            String receiverRef = "messages/" + mReceiverId + "/" + mSenderId;
 
-            String pushId = mRootRef.child("messages").child(Integer.toString(mSenderId)).child(Integer.toString(mReceiverId))
+            String pushId = mRootRef.child("messages").child(mSenderId).child(mReceiverId)
                     .push().getKey();
 
             Map messageMap = new HashMap();
@@ -115,7 +115,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void loadMessages() {
-        mRootRef.child("messages").child(Integer.toString(mSenderId)).child(Integer.toString(mReceiverId))
+        mRootRef.child("messages").child(mSenderId).child(mReceiverId)
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {

@@ -66,11 +66,12 @@ public class CustomAdapterAttendanceSheet extends ArrayAdapter {
 
         AttendanceDetail item = getItem(position);
 
-
-        viewHolder.tvName.setText(item.name);
-        viewHolder.checkBox.setChecked(item.present);
+        viewHolder.tvName.setText(item.getName());
+        viewHolder.checkBox.setChecked(item.isPresentAbsent());
 
 
         return result;
     }
+
+
 }

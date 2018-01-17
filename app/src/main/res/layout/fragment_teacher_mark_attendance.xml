@@ -8,15 +8,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <DatePicker
-            android:id="@+id/datePicker"
-            android:layout_width="match_parent"
+        android:orientation="vertical"
+
+        >
+
+        <TextView
+            android:id="@+id/tvAttendanceDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-        </DatePicker>
-
+            android:layout_gravity="center"/>
 
         <Button
             android:id="@+id/btnOnSelectDate"
@@ -25,6 +25,19 @@
             android:layout_height="wrap_content"
 
             />
+
+        <ListView
+            android:id="@+id/lvAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/onMarkAttendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mark_attendance"/>
     </LinearLayout>
 
 </FrameLayout>

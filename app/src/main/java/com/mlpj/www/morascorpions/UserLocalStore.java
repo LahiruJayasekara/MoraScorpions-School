@@ -19,21 +19,38 @@ public class UserLocalStore {
 
     public void setUserDetails(User user){
         SharedPreferences.Editor spEditor = userLocalDatabase.edit();
-        spEditor.putInt("id", user.id);
-        spEditor.putString("name", user.name);
-        spEditor.putString("userType", user.userType);
-        spEditor.putString("className", user.className);
-        spEditor.putString("admitionDate", user.admitionDate);
+        spEditor.putString("p_Id", user.getP_Id());
+        spEditor.putString("roleName", user.getRoleName());
+        spEditor.putString("name", user.getName());
+        spEditor.putString("picUrl", user.getPicUrl());
+        spEditor.putString("tpNumber", user.getTpNumber());
+        spEditor.putString("email", user.getEmail());
+        spEditor.putString("admissionNumber", user.getAdmissionNumber());
+        spEditor.putString("admitionDate", user.getAdmissionDate());
+        spEditor.putString("teacherGrade", user.getTeacherGrade());
+        spEditor.putString("principalGrade", user.getPrincipalGrade());
+        spEditor.putString("studentId", user.getStudentId());
+        spEditor.putString("classRoomName", user.getClassRoomName());
+
         spEditor.commit();
     }
 
     public User getUserDetails(){
-        int userId = userLocalDatabase.getInt("id",-1);
+        String p_Id = userLocalDatabase.getString("p_Id","");
+        String roleName = userLocalDatabase.getString("roleName","");
         String name = userLocalDatabase.getString("name","");
-        String userType = userLocalDatabase.getString("userType","");
-        String className = userLocalDatabase.getString("className","");
-        String admitionDate = userLocalDatabase.getString("admitionDate","");
-        User user =new User(userId, name, userType, className, admitionDate);
+        String picUrl = userLocalDatabase.getString("picUrl","");
+        String tpNumber = userLocalDatabase.getString("tpNumber","");
+        String email = userLocalDatabase.getString("email","");
+        String admissionNumber = userLocalDatabase.getString("admissionNumber","");
+        String admissionDate = userLocalDatabase.getString("admitionDate","");
+        String teacherGrade = userLocalDatabase.getString("teacherGrade","");
+        String principalGrade = userLocalDatabase.getString("principalGrade","");
+        String studentId = userLocalDatabase.getString("studentId","");
+        String classRoomName = userLocalDatabase.getString("classRoomName","");
+
+        User user =new User(p_Id, roleName, name, picUrl, tpNumber, email, admissionNumber, admissionDate, teacherGrade, principalGrade, studentId,
+                classRoomName);
         return  user;
     }
 

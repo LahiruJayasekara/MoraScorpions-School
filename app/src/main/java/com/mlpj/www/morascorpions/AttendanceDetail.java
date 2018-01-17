@@ -9,21 +9,41 @@ import java.io.Serializable;
 
 public class AttendanceDetail implements Serializable{
 
-    int studentId;
-    public String name;
-    boolean present;
-    String date;
+    private String p_Id;
+    private String name;
+    private boolean presentAbsent;
+    private String date;
 
-    public AttendanceDetail(int studentId, boolean present, String date) {
-        this.studentId = studentId;
-        this.present = present;
+    public AttendanceDetail(String p_Id, String name, boolean presentAbsent, String date) {
+        this.p_Id = p_Id;
+        this.name = name;
+        this.presentAbsent = presentAbsent;
         this.date = date;
     }
 
-    AttendanceDetail(int studentId, String name, boolean present, String date) {
-        this.studentId = studentId;
-        this.name = name;
-        this.present = present;
+    public AttendanceDetail(String p_Id, boolean presentAbsent, String date) {
+        this.p_Id = p_Id;
+        this.presentAbsent = presentAbsent;
         this.date = date;
+    }
+
+    public String getP_Id() {
+        return p_Id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public boolean isPresentAbsent() {
+        return presentAbsent;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setPresentAbsent(boolean presentAbsent) {
+        this.presentAbsent = presentAbsent;
     }
 }

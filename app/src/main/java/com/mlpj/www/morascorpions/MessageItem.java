@@ -10,11 +10,11 @@ public class MessageItem {
     private String message;
     private boolean seen;
     private long time;
-    private int from;
+    private String from;
 
     public MessageItem(){}
 
-    public MessageItem(String message, boolean seen, long time, int from) {
+    public MessageItem(String message, boolean seen, long time, String from) {
         this.message = message;
         this.seen = seen;
         this.time = time;
@@ -37,7 +37,7 @@ public class MessageItem {
         return time;
     }
 
-    public int getFrom() {
+    public String getFrom() {
         return from;
     }
 }

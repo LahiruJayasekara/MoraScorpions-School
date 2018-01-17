@@ -38,7 +38,7 @@ public class MessagesAdapter  extends RecyclerView.Adapter<MessagesAdapter.ViewH
         final MessageItem messageItem = messageItems.get(position);
         holder.name.setText(messageItem.getSenderName());
         holder.message.setText(messageItem.getMessage());
-        if(messageItem.getFrom() == new UserLocalStore(context).getUserDetails().getId()){
+        if(messageItem.getFrom() == new UserLocalStore(context).getUserDetails().getP_Id()){
             holder.linearLayout.setGravity(Gravity.RIGHT);
             holder.linearLayoutMessageItem.setBackgroundColor(Color.parseColor("#72a6f9"));
             holder.cardViewMessage.setBackgroundColor(Color.parseColor("#72a6f9"));

@@ -24,4 +24,7 @@
     <string name="instant_chat_with_teachers">Instant Chat with Teachers</string>
     <string name="base_url_remote_localhost">http://192.168.1.101:49375/user/</string>
     <string name="base_url_localhost">http://10.0.2.2:49375/user/</string>
+    <string name="write_comment">Write Comment...</string>
+    <string name="base_url_azure">http://sclmanagement.azurewebsites.net/</string>
+    <string name="profile">Profile</string>
 </resources>

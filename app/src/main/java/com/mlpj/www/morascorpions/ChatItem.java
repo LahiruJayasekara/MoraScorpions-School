@@ -9,10 +9,10 @@ public class ChatItem {
     private String name;
     private String description;
     //add the user id
-    private int userId;
+    private String userId;
 
 
-    public ChatItem(String name, String description, int userId) {
+    public ChatItem(String name, String description, String userId) {
         this.name = name;
         this.description = description;
         this.userId = userId;
@@ -28,7 +28,7 @@ public class ChatItem {
         return description;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 }

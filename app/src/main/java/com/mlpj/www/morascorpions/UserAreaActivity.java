@@ -11,10 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -37,8 +40,10 @@ public class UserAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
 
+
         mUserLocalStore = new UserLocalStore(this);
         mCurrentUser = mUserLocalStore.getUserDetails();
+        Log.d("RoleName", mCurrentUser.getRoleName());
 
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer);
         mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
@@ -47,20 +52,37 @@ public class UserAreaActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mNavigationView = (NavigationView)findViewById(R.id.navigationView);
-        setNavigationViewMenu(mCurrentUser.userType);
+        setNavigationViewMenu(mCurrentUser.getRoleName());
         mProfileName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.profileName);
         mProfileName.setText(mCurrentUser.getName());
         mProfilePic = (CircleImageView) mNavigationView.getHeaderView(0).findViewById(R.id.circleImageProfile);
-        Picasso.with(this).load("https://www.sonypark360.net/wp-content/uploads/2017/08/profile-pictures.png").into(mProfilePic);
+        if(!mCurrentUser.getPicUrl().equals("")){
+            Picasso.with(this).load(mCurrentUser.getPicUrl()).into(mProfilePic);
+        }
+
+        if(mCurrentUser.getRoleName().equals("Teacher")){
+            Menu menu = mNavigationView.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.teacherClasses);
+            Menu menu1 = menuItem.getSubMenu();
+
+            //Code to get the list of classe and add the nam into items
+            //get the classId from API and assign itto menu id
+            //example
+
+            int classId = 1;
+            int classId2 = 5;
+
+            menu1.add(Menu.NONE,classId,Menu.NONE,"13C").setIcon(R.drawable.ic_navigate_next);
+            menu1.add(Menu.NONE,classId2,Menu.NONE,"12B").setIcon(R.drawable.ic_navigate_next);
+
+        }
+
 
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
                 switch (item.getItemId()){
-                    case R.id.parentHome:
-                        fragment = new ParentHomeFragment();
-                        break;
                     case R.id.teacherHome:
                         fragment = new TeacherHomeFragment();
                         break;
@@ -70,9 +92,20 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.teacherChat:
                         fragment = new TeacherChatFragment();
                         break;
+                    case R.id.teacherProfile:
+                        fragment = new TeacherProfileFragment();
+                        break;
+                    case R.id.parentHome:
+                        fragment = new ParentHomeFragment();
+                        break;
                     case R.id.parentChat:
                         fragment = new TeacherChatFragment();
                         break;
+                    default:
+                        fragment = new NotesAndHwFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("classId", item.getItemId());
+                        fragment.setArguments(bundle);
                 }
 
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -99,17 +132,18 @@ public class UserAreaActivity extends AppCompatActivity {
     private void setNavigationViewMenu(String userType) {
         Fragment fragment = null;
         switch (userType){
-            case "s":
+            case "Student":
                 mNavigationView.inflateMenu(R.menu.menu_student_navigation_drawer);
+                fragment = new TeacherHomeFragment();
                 break;
-            case "pa":
+            case "Parent":
                 mNavigationView.inflateMenu(R.menu.menu_parent_navigation_drawer);
                 fragment = new ParentHomeFragment();
                 break;
-            case "pr":
+            case "Principal":
                 mNavigationView.inflateMenu(R.menu.menu_principal_navigation_drawer);
                 break;
-            case "t":
+            case "Teacher":
                 mNavigationView.inflateMenu(R.menu.menu_teacher_navigation_drawer);
                 fragment = new TeacherHomeFragment();
                 break;

@@ -5,15 +5,15 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@drawable/school"
+    android:background="@drawable/profile_header"
     >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageProfile"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         app:srcCompat="@drawable/default_profile_pic" />
 
     <TextView
