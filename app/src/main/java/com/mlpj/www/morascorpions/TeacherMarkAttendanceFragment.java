@@ -1,6 +1,5 @@
 package com.mlpj.www.morascorpions;
 
-
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;

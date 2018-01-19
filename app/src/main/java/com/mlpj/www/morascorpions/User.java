@@ -43,6 +43,8 @@ public class User implements Serializable{
         this.password = password;
     }
 
+
+
     public String getP_Id() {
         return p_Id;
     }
@@ -72,6 +74,10 @@ public class User implements Serializable{
     }
 
     public String getAdmissionDate() {
+        if(admissionDate != null){
+            String[] parts = admissionDate.split("T");
+            return parts[0];
+        }
         return admissionDate;
     }
 

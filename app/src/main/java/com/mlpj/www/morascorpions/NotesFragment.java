@@ -42,7 +42,7 @@ public class NotesFragment extends Fragment {
                 new IntentFilter("NOTE"));
 
         Bundle args = getArguments();
-        final int classId = args.getInt("classId");     //use this to get the set of notes along with teacherId
+        final int ternaryId = args.getInt("ternaryId");     //use this to get the set of notes along with ternaryId
 
 
         mNoteItems = new ArrayList<>();
@@ -70,7 +70,7 @@ public class NotesFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), UploadNotesActivity.class);
-                intent.putExtra("classId",classId);
+                intent.putExtra("ternaryId",ternaryId);
                 startActivity(intent);
             }
         });

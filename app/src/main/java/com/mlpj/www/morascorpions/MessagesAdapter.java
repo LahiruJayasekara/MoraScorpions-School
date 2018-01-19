@@ -24,8 +24,6 @@ public class MessagesAdapter  extends RecyclerView.Adapter<MessagesAdapter.ViewH
         this.context = context;
     }
 
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).
@@ -38,16 +36,20 @@ public class MessagesAdapter  extends RecyclerView.Adapter<MessagesAdapter.ViewH
         final MessageItem messageItem = messageItems.get(position);
         holder.name.setText(messageItem.getSenderName());
         holder.message.setText(messageItem.getMessage());
-        if(messageItem.getFrom() == new UserLocalStore(context).getUserDetails().getP_Id()){
+        if(messageItem.getFrom().equals(new UserLocalStore(context).getUserDetails().getP_Id())){
+            Toast.makeText(context,"right",Toast.LENGTH_LONG).show();
             holder.linearLayout.setGravity(Gravity.RIGHT);
+            holder.name.setGravity(Gravity.RIGHT);
+            holder.message.setGravity(Gravity.RIGHT);
             holder.linearLayoutMessageItem.setBackgroundColor(Color.parseColor("#72a6f9"));
             holder.cardViewMessage.setBackgroundColor(Color.parseColor("#72a6f9"));
+            holder.cardViewMessage.setRadius(100);
         }else{
             holder.linearLayout.setGravity(Gravity.LEFT);
             holder.linearLayoutMessageItem.setBackgroundColor(Color.parseColor("#ffffff"));
             holder.cardViewMessage.setBackgroundColor(Color.parseColor("#ffffff"));
+            holder.cardViewMessage.setRadius(100);
         }
-
     }
 
     @Override

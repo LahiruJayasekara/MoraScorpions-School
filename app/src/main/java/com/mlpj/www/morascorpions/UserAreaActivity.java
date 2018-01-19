@@ -1,6 +1,7 @@
 package com.mlpj.www.morascorpions;
 
 //import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.graphics.Rect;
@@ -21,7 +22,15 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserAreaActivity extends AppCompatActivity {
 
@@ -33,6 +42,7 @@ public class UserAreaActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private MenuItem mPreviousMenuItem;
+    private ProgressDialog mProgressDialog;
     private int flag = 0;
 
     @Override
@@ -63,17 +73,42 @@ public class UserAreaActivity extends AppCompatActivity {
         if(mCurrentUser.getRoleName().equals("Teacher")){
             Menu menu = mNavigationView.getMenu();
             MenuItem menuItem = menu.findItem(R.id.teacherClasses);
-            Menu menu1 = menuItem.getSubMenu();
+            final Menu menu1 = menuItem.getSubMenu();
 
-            //Code to get the list of classe and add the nam into items
-            //get the classId from API and assign itto menu id
-            //example
 
-            int classId = 1;
-            int classId2 = 5;
+            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog.setTitle("Fetching Data...");
+            mProgressDialog.setMessage("Please wait...");
+            mProgressDialog.show();
 
-            menu1.add(Menu.NONE,classId,Menu.NONE,"13C").setIcon(R.drawable.ic_navigate_next);
-            menu1.add(Menu.NONE,classId2,Menu.NONE,"12B").setIcon(R.drawable.ic_navigate_next);
+
+            Retrofit.Builder builder = new Retrofit.Builder()
+                    //.baseUrl(getString(R.string.base_url_localhost))       //localhost
+                    .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                    .addConverterFactory(GsonConverterFactory.create());
+            Retrofit retrofit = builder.build();
+
+            ApiClient client = retrofit.create(ApiClient.class);
+            Call<ArrayList<ClassSubjectOfTeacher>> call =  client.getSubjectClassesOfTeacher(mCurrentUser.getP_Id());
+
+            call.enqueue(new Callback<ArrayList<ClassSubjectOfTeacher>>() {
+                @Override
+                public void onResponse(Call<ArrayList<ClassSubjectOfTeacher>> call, Response<ArrayList<ClassSubjectOfTeacher>> response) {
+                    mProgressDialog.dismiss();
+                    List<ClassSubjectOfTeacher> classSubjectList = new ArrayList<>();
+                    classSubjectList = response.body();
+                    for(int i = 0; i < classSubjectList.size(); i++){
+                        menu1.add(Menu.NONE,classSubjectList.get(i).getId(),Menu.NONE, classSubjectList.get(i).getClassRoomName() + " " + classSubjectList.get(i).getSubjectName()).setIcon(R.drawable.ic_navigate_next);
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ArrayList<ClassSubjectOfTeacher>> call, Throwable t) {
+                    mProgressDialog.dismiss();
+                    Toast.makeText(UserAreaActivity.this, "Error " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
 
         }
 
@@ -98,13 +133,31 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.parentHome:
                         fragment = new ParentHomeFragment();
                         break;
+                    case R.id.parentProfile:
+                        fragment = new ParentProfileFragment();
+                        break;
+                    case R.id.parentAttendanceView:
+                        fragment = new ParentAttendanceViewFragment();
+                        break;
                     case R.id.parentChat:
-                        fragment = new TeacherChatFragment();
+                        fragment = new ParentChatFragment();
+                        break;
+                    case R.id.parentHw:
+                        fragment = new HwViewFragment();
+                        break;
+                    case R.id.studentHome:
+                        fragment = new StudentHomeFragment();
+                        break;
+                    case R.id.studentProfile:
+                        fragment = new StudentProfileFragment();
+                        break;
+                    case R.id.studentHw:
+                        fragment = new HwViewFragment();
                         break;
                     default:
                         fragment = new NotesAndHwFragment();
                         Bundle bundle = new Bundle();
-                        bundle.putInt("classId", item.getItemId());
+                        bundle.putInt("ternaryId", item.getItemId());
                         fragment.setArguments(bundle);
                 }
 
@@ -134,7 +187,7 @@ public class UserAreaActivity extends AppCompatActivity {
         switch (userType){
             case "Student":
                 mNavigationView.inflateMenu(R.menu.menu_student_navigation_drawer);
-                fragment = new TeacherHomeFragment();
+                fragment = new StudentHomeFragment();
                 break;
             case "Parent":
                 mNavigationView.inflateMenu(R.menu.menu_parent_navigation_drawer);
@@ -169,7 +222,6 @@ public class UserAreaActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,LoginActivity.class);
                 startActivity(intent);
                 finish();
-
         }
         return super.onOptionsItemSelected(item);
     }

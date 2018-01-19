@@ -41,12 +41,21 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline" />
 
             <TextView
+                android:id="@+id/tvHwContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:textStyle="bold"
+                android:text="hdvgvf sdshv hbf" />
+
+            <TextView
                 android:id="@+id/tvHwVisibilityStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="5dp"
-                android:text="visibility start - 2017 - 04 - 05" />
+                />
 
             <TextView
                 android:id="@+id/tvHwVisibilityEnd"
@@ -54,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:padding="5dp"
-                android:text="visibility End - 2017 - 05 - 05" />
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"

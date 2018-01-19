@@ -33,4 +33,33 @@ public interface ApiClient {
     @Multipart
     @POST("uploadFile")
     Call<ResponseBody> uploadFile(@Part("noteTitle") String noteTitle, @Part MultipartBody.Part file);
+
+    @GET("/api/TeacherDetails/ClassesOfTeacher/{teacherId}")
+    Call<ArrayList<ClassRoomItem>> getClassListOfTeacher(@Path("teacherId") String teacherId);
+
+    @GET("/api/TeacherDetails/GetAllParentOfAClass/{className}")
+    Call<ArrayList<ChatItem>> getAllParentsOfClass(@Path("className") String className);
+
+    @GET("/api/Parent/GetTeachersOfAStudent/{teacherPID}")
+    Call<ArrayList<ChatItem>> getAllTeachersOfStudent(@Path("teacherPID") String teacherPID);
+
+    @GET("/api/TeacherDetails/SubjectClassesOfTeacher/{teacherPID}")
+    Call<ArrayList<ClassSubjectOfTeacher>> getSubjectClassesOfTeacher(@Path("teacherPID") String teacherPID);
+
+    @GET("/api/Homework/GetHomeworkMobileApp/{ternaryId}")
+    Call<ArrayList<HwItem>> getHomeworksForTeacher(@Path("ternaryId") int ternaryId);
+
+    @GET("/api/Homework/GetHomeworkOfAStudent/{p_Id}")
+    Call<ArrayList<HwItem>> getHomeworksForStudent(@Path("p_Id") String p_Id);
+
+    @GET("/api/Homework/GetHomeworkOfAParent/{p_Id}")
+    Call<ArrayList<HwItem>> getHomeworksForParent(@Path("p_Id") String p_Id);
+
+    @GET("/api/AttendanceDetails/GetAttendancePercentageOfAStudent/{p_Id}")
+    Call<Float> getAttendancePercentageStudent(@Path("p_Id") String p_Id);
+
+    @GET("/api/AttendanceDetails/GetAttendancePercentageOfAStudent/{p_Id}")
+    Call<Float> getAttendancePercentageStudentForParent(@Path("p_Id") String p_Id);
+
+
 }

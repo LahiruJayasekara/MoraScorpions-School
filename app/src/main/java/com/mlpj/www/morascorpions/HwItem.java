@@ -8,69 +8,67 @@ import java.io.Serializable;
  */
 
 public class HwItem implements Serializable{
-    private int hwId = -1;
-    private int classId;        //need?
-    private String hwUploadedDate;
-    private String hwDeadline;
-    private String hwHeading;
-    private String hwFileName;
-    private String hwUrl;
-    private String hwVisibilityStartDate;
-    private String hwVisibilityEndDate;
+    //private int hwId = -1;
+    private int ternaryId;        //need?
+    private String uploadedTime;
+    private String deadline;
+    private String topic;
+    private String content;
+    //private String hwFileName;
+    private String pdf;
+    private String visibilityStartDate;
+    private String visibilityEndDate;
+    private boolean visibility;
 
-    public HwItem(int hwId, int classId, String hwUploadedDate, String hwDeadline, String hwHeading, String hwFileName, String hwUrl, String hwVisibilityStartDate, String hwVisibilityEndDate) {
-        this.hwId = hwId;
-        this.classId = classId;
-        this.hwUploadedDate = hwUploadedDate;
-        this.hwDeadline = hwDeadline;
-        this.hwHeading = hwHeading;
-        this.hwFileName = hwFileName;
-        this.hwUrl = hwUrl;
-        this.hwVisibilityStartDate = hwVisibilityStartDate;
-        this.hwVisibilityEndDate = hwVisibilityEndDate;
+    public HwItem(int ternaryId, String uploadedTime, String deadline, String topic, String content, String pdf, String visibilityStartDate, String visibilityEndDate, boolean visibility) {
+        this.ternaryId = ternaryId;
+        this.uploadedTime = uploadedTime;
+        this.deadline = deadline;
+        this.topic = topic;
+        this.content = content;
+        this.pdf = pdf;
+        this.visibilityStartDate = visibilityStartDate;
+        this.visibilityEndDate = visibilityEndDate;
+        this.visibility = visibility;
     }
 
-    public HwItem(String hwDeadline, String hwHeading, String hwFileName, String hwVisibilityStartDate, String hwVisibilityEndDate) {
-        this.hwDeadline = hwDeadline;
-        this.hwHeading = hwHeading;
-        this.hwFileName = hwFileName;
-        this.hwVisibilityStartDate = hwVisibilityStartDate;
-        this.hwVisibilityEndDate = hwVisibilityEndDate;
+    public int getTernaryId() {
+        return ternaryId;
     }
 
-    public int getHwId() {
-        return hwId;
+    public String getUploadedTime() {
+        String[] parts = uploadedTime.split("T");
+        return parts[0];
     }
 
-    public int getClassId() {
-        return classId;
+    public String getDeadline() {
+        String[] parts = deadline.split("T");
+        return parts[0];
     }
 
-    public String getHwUploadedDate() {
-        return hwUploadedDate;
+    public String getTopic() {
+        return topic;
     }
 
-    public String getHwDeadline() {
-        return hwDeadline;
+    public String getContent() {
+        return content;
     }
 
-    public String getHwHeading() {
-        return hwHeading;
+    public String getPdf() {
+        return pdf;
     }
 
-    public String getHwFileName() {
-        return hwFileName;
+    public String getVisibilityStartDate() {
+        String[] parts = visibilityStartDate.split("T");
+        return parts[0];
     }
 
-    public String getHwUrl() {
-        return hwUrl;
+    public String getVisibilityEndDate() {
+        String[] parts = visibilityEndDate.split("T");
+        return parts[0];
     }
 
-    public String getHwVisibilityStartDate() {
-        return hwVisibilityStartDate;
-    }
-
-    public String getHwVisibilityEndDate() {
-        return hwVisibilityEndDate;
+    public boolean isVisibility() {
+        return visibility;
     }
 }

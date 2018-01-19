@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.mlpj.www.morascorpions.ParentAttendanceViewFragment"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvWarningParent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Improve Your child's Attendance"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@color/red" />
+
+    <com.github.lzyzsd.circleprogress.DonutProgress
+        android:id="@+id/parentAttendanceProgressBar"
+        android:layout_width="275dp"
+        android:layout_height="275dp"
+        app:donut_finished_color="@color/red"
+        app:donut_finished_stroke_width="20dp"
+        app:donut_unfinished_stroke_width="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Attendance of Your Child"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="@android:color/black"/>
+
+</LinearLayout>

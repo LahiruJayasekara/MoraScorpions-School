@@ -34,7 +34,10 @@ public class TeacherProfileFragment extends Fragment {
         tvProfileTeacherTp = view.findViewById(R.id.tvProfileTeacherTp);
         tvProfileTeacherEmail = view.findViewById(R.id.tvProfileTeacherEmail);
 
-        Picasso.with(getContext()).load(currentUser.getPicUrl()).into(imgProfilePic);
+        if(currentUser.getPicUrl() != null){
+            Picasso.with(getContext()).load(currentUser.getPicUrl()).into(imgProfilePic);
+        }
+
         tvProfileTeacherName.setText(currentUser.getName());
         tvProfileTeacherRoleAndClass.setText("Teacher of Class " + currentUser.getClassRoomName());
         tvProfileTeacherGrade.setText(currentUser.getTeacherGrade());

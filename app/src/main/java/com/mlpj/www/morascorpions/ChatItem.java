@@ -7,28 +7,38 @@ package com.mlpj.www.morascorpions;
 
 public class ChatItem {
     private String name;
-    private String description;
+    //private String description;
     //add the user id
-    private String userId;
+    private String p_Id;
+    private String subjectName;
+    private String picUrl;
 
-
-    public ChatItem(String name, String description, String userId) {
+    public ChatItem(String name, String p_Id, String subjectName, String picUrl) {
         this.name = name;
-        this.description = description;
-        this.userId = userId;
+        this.p_Id = p_Id;
+        this.subjectName = subjectName;
+        this.picUrl = picUrl;
     }
 
+    public ChatItem(String name, String p_Id, String picUrl) {
+        this.name = name;
+        this.p_Id = p_Id;
+        this.picUrl = picUrl;
+    }
 
     public String getName() {
         return name;
     }
 
-    public String getDescription() {
-
-        return description;
+    public String getP_Id() {
+        return p_Id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getSubjectName() {
+        return subjectName + " Teacher";
+    }
+
+    public String getPicUrl() {
+        return picUrl;
     }
 }

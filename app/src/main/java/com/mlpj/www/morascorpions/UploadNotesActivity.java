@@ -48,7 +48,7 @@ public class UploadNotesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload_notes);
 
-        int classId = getIntent().getIntExtra("classId", -1);     //use this when uploading the note
+        int ternaryId = getIntent().getIntExtra("ternaryId", -1);     //use this when uploading the note
 
         mEtNoteTitle = findViewById(R.id.etNoteTitle);
         mEtNoteDescription = findViewById(R.id.etNoteDescription);
