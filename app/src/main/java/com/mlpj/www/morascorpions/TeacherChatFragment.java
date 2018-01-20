@@ -44,7 +44,7 @@ public class TeacherChatFragment extends Fragment {
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
@@ -105,7 +105,7 @@ public class TeacherChatFragment extends Fragment {
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 

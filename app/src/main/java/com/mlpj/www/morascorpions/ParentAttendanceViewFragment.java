@@ -42,12 +42,12 @@ public class ParentAttendanceViewFragment extends Fragment {
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
         ApiClient client = retrofit.create(ApiClient.class);
-        Call<Float> call =  client.getAttendancePercentageStudentForParent("1b9cd4a5-d446-47cd-bdf8-feba752e9057"); //change this
+        Call<Float> call =  client.getAttendancePercentageStudentForParent(mCurrentUser.getP_Id()); //change this
 
         call.enqueue(new Callback<Float>() {
             @Override

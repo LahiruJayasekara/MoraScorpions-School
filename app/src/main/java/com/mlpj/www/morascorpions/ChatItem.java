@@ -9,20 +9,20 @@ public class ChatItem {
     private String name;
     //private String description;
     //add the user id
-    private String p_Id;
+    private String userId;
     private String subjectName;
     private String picUrl;
 
     public ChatItem(String name, String p_Id, String subjectName, String picUrl) {
         this.name = name;
-        this.p_Id = p_Id;
+        this.userId = p_Id;
         this.subjectName = subjectName;
         this.picUrl = picUrl;
     }
 
     public ChatItem(String name, String p_Id, String picUrl) {
         this.name = name;
-        this.p_Id = p_Id;
+        this.userId = p_Id;
         this.picUrl = picUrl;
     }
 
@@ -31,7 +31,7 @@ public class ChatItem {
     }
 
     public String getP_Id() {
-        return p_Id;
+        return userId;
     }
 
     public String getSubjectName() {

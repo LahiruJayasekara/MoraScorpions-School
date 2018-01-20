@@ -45,15 +45,15 @@ public class StudentProfileFragment extends Fragment {
         tvProfileStudentEmail = view.findViewById(R.id.tvProfileStudentEmail);
         donutProgress = view.findViewById(R.id.donutProgressStudent);
 
-        if(currentUser.getPicUrl() != null){
+        if(!currentUser.getPicUrl().equals("")){
             Picasso.with(getContext()).load(currentUser.getPicUrl()).into(imgProfilePic);
         }
 
         tvProfileStudentName.setText(currentUser.getName());
         tvProfileStudentRoleAndClass.setText("Student of Class " + currentUser.getClassRoomName());
-        tvProfileStudentAdmissionNo.setText(currentUser.getAdmissionNumber());
-        tvProfileAdmissionDate.setText(currentUser.getAdmissionDate());
-        tvProfileStudentEmail.setText(currentUser.getEmail());
+        tvProfileStudentAdmissionNo.setText("Admission No- " + currentUser.getAdmissionNumber());
+        tvProfileAdmissionDate.setText("Admission Date- " + currentUser.getAdmissionDate());
+        tvProfileStudentEmail.setText("Email- " + currentUser.getEmail());
 
         mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setTitle("Logging In...");
@@ -62,7 +62,7 @@ public class StudentProfileFragment extends Fragment {
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 

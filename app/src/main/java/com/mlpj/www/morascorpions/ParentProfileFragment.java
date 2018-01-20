@@ -32,7 +32,7 @@ public class ParentProfileFragment extends Fragment {
         tvProfileParentTp = view.findViewById(R.id.tvProfileParentTp);
         tvProfileParentEmail = view.findViewById(R.id.tvProfileParentEmail);
 
-        if(currentUser.getPicUrl() != null){
+        if(!currentUser.getPicUrl().equals("")){
             Picasso.with(getContext()).load(currentUser.getPicUrl()).into(imgProfilePic);
         }
 

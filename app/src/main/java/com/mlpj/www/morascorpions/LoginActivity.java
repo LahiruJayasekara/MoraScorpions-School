@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Retrofit.Builder builder = new Retrofit.Builder()
                     //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                    .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                    .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
 
@@ -86,6 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                     User user = response.body().get(0);
                     userLocalStore.setUserLoggedIn(true);
                     userLocalStore.setUserDetails(user);
+
+                    Toast.makeText(getApplicationContext(),user.getP_Id(),Toast.LENGTH_LONG).show();
 
                     Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);
                     startActivity(intent);

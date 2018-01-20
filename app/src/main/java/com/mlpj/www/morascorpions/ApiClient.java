@@ -58,8 +58,7 @@ public interface ApiClient {
     @GET("/api/AttendanceDetails/GetAttendancePercentageOfAStudent/{p_Id}")
     Call<Float> getAttendancePercentageStudent(@Path("p_Id") String p_Id);
 
-    @GET("/api/AttendanceDetails/GetAttendancePercentageOfAStudent/{p_Id}")
+    @GET("/api/AttendanceDetails/GetAttendancePercentageOfAParentStd/{p_Id}")
     Call<Float> getAttendancePercentageStudentForParent(@Path("p_Id") String p_Id);
-
 
 }

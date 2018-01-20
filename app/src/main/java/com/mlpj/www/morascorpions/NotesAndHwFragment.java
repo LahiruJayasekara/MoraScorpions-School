@@ -38,7 +38,7 @@ public class NotesAndHwFragment extends Fragment {
 
         Retrofit.Builder builder = new Retrofit.Builder()
                 //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
@@ -48,6 +48,9 @@ public class NotesAndHwFragment extends Fragment {
         call.enqueue(new Callback<ArrayList<HwItem>>() {
             @Override
             public void onResponse(Call<ArrayList<HwItem>> call, Response<ArrayList<HwItem>> response) {
+                if(response.body().size() == 0){
+                    Toast.makeText(getContext(),"No HomeWorks Available", Toast.LENGTH_LONG).show();
+                }
                 mNotesHwPagerAdapter = new NotesHwPagerAdapter(getFragmentManager(), ternaryId, response.body());
                 mViewPager.setAdapter(mNotesHwPagerAdapter);
                 mTabLayout.setupWithViewPager(mViewPager);

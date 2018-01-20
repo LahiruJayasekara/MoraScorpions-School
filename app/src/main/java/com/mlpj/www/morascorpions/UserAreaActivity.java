@@ -50,6 +50,8 @@ public class UserAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
 
+        Intent intent = new Intent(this, NotificationService.class);
+        //startService(intent);
 
         mUserLocalStore = new UserLocalStore(this);
         mCurrentUser = mUserLocalStore.getUserDetails();
@@ -84,7 +86,7 @@ public class UserAreaActivity extends AppCompatActivity {
 
             Retrofit.Builder builder = new Retrofit.Builder()
                     //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                    .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                    .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
 
@@ -97,6 +99,7 @@ public class UserAreaActivity extends AppCompatActivity {
                     mProgressDialog.dismiss();
                     List<ClassSubjectOfTeacher> classSubjectList = new ArrayList<>();
                     classSubjectList = response.body();
+                    //Toast.makeText(getApplicationContext(),mCurrentUser.getP_Id(),Toast.LENGTH_LONG).show();
                     for(int i = 0; i < classSubjectList.size(); i++){
                         menu1.add(Menu.NONE,classSubjectList.get(i).getId(),Menu.NONE, classSubjectList.get(i).getClassRoomName() + " " + classSubjectList.get(i).getSubjectName()).setIcon(R.drawable.ic_navigate_next);
                     }

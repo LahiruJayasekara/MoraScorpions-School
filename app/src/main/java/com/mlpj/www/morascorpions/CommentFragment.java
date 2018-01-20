@@ -86,10 +86,7 @@ public class CommentFragment extends DialogFragment {
                 //code to set a notification probably updating the notification database table
             }
         });
-
         this.getDialog().setTitle("Comments...");
-
         return view;
     }
-
 }

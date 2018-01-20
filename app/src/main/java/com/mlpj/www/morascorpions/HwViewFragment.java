@@ -49,7 +49,7 @@ public class HwViewFragment extends Fragment {
         if(currentUser.getRoleName().equals("Parent")){
             Retrofit.Builder builder = new Retrofit.Builder()
                     //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                    .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                    .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
 
@@ -60,6 +60,9 @@ public class HwViewFragment extends Fragment {
                 @Override
                 public void onResponse(Call<ArrayList<HwItem>> call, Response<ArrayList<HwItem>> response) {
                     mHwItems =response.body();
+                    if(mHwItems.size() == 0){
+                        Toast.makeText(getContext(),"No HomeWorks Available", Toast.LENGTH_LONG).show();
+                    }
                     mHwAdapter = new HwAdapter(mHwItems, getContext());
                     mRecyclerView.setAdapter(mHwAdapter);
                     mProgressDialog.dismiss();
@@ -76,7 +79,7 @@ public class HwViewFragment extends Fragment {
         else if(currentUser.getRoleName().equals("Student")){
             Retrofit.Builder builder = new Retrofit.Builder()
                     //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                    .baseUrl("http://sclmanagement.azurewebsites.net/")    //remote localhost
+                    .baseUrl(getString(R.string.base_url_azure))    //remote localhost
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
 
@@ -88,6 +91,9 @@ public class HwViewFragment extends Fragment {
                 public void onResponse(Call<ArrayList<HwItem>> call, Response<ArrayList<HwItem>> response) {
                     mProgressDialog.dismiss();
                     mHwItems =response.body();
+                    if(mHwItems.size() == 0){
+                        Toast.makeText(getContext(),"No HomeWorks Available", Toast.LENGTH_LONG).show();
+                    }
                     mHwAdapter = new HwAdapter(mHwItems, getContext());
                     mRecyclerView.setAdapter(mHwAdapter);
                 }

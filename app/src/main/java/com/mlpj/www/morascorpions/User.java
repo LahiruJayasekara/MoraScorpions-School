@@ -8,11 +8,11 @@ import java.io.Serializable;
  */
 
 public class User implements Serializable{
-    private String p_Id;
+    private String userId;
     private String roleName;
     private String name;
-    private String picUrl;
-    private String tpNumber;
+    private String image;
+    private String phoneNumber;
     private String email;
     private String admissionNumber;
     private String admissionDate;
@@ -24,11 +24,11 @@ public class User implements Serializable{
 
 
     public User(String p_Id, String roleName, String name, String picUrl, String tpNumber, String email, String admissionNumber, String admissionDate, String teacherGrade, String principalGrade, String studentId, String classRoomName) {
-        this.p_Id = p_Id;
+        this.userId = p_Id;
         this.roleName = roleName;
         this.name = name;
-        this.picUrl = picUrl;
-        this.tpNumber = tpNumber;
+        this.image = picUrl;
+        this.phoneNumber = tpNumber;
         this.email = email;
         this.admissionNumber = admissionNumber;
         this.admissionDate = admissionDate;
@@ -46,7 +46,7 @@ public class User implements Serializable{
 
 
     public String getP_Id() {
-        return p_Id;
+        return userId;
     }
 
     public String getRoleName() {
@@ -58,11 +58,11 @@ public class User implements Serializable{
     }
 
     public String getPicUrl() {
-        return picUrl;
+        return image;
     }
 
     public String getTpNumber() {
-        return tpNumber;
+        return phoneNumber;
     }
 
     public String getEmail() {
