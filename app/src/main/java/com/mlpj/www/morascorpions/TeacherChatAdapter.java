@@ -40,8 +40,8 @@ public class TeacherChatAdapter extends RecyclerView.Adapter<TeacherChatAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final ChatItem chatItem = chatItems.get(position);
-        holder.tvName.setText("Parent of " + chatItem.getName());
-        //holder.tvDescription.setText(chatItem.getDescription());
+        holder.tvName.setText(chatItem.getStudentName());
+        holder.tvDescription.setText("chat with " + chatItem.getName() + ", parent of " + chatItem.getStudentName());
         if(chatItem.getPicUrl() != null){
             Picasso.with(context).load(chatItem.getPicUrl()).into(holder.chatProfileImage);
         }

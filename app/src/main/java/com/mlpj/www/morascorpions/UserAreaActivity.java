@@ -16,10 +16,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mlpj.www.morascorpions.Syllabus.SyllabusViewFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -148,6 +148,9 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.parentHw:
                         fragment = new HwViewFragment();
                         break;
+                    case R.id.parentSyllabus:
+                        fragment = new SyllabusViewFragment();
+                        break;
                     case R.id.studentHome:
                         fragment = new StudentHomeFragment();
                         break;
@@ -156,6 +159,9 @@ public class UserAreaActivity extends AppCompatActivity {
                         break;
                     case R.id.studentHw:
                         fragment = new HwViewFragment();
+                        break;
+                    case R.id.studentSyllabus:
+                        fragment = new SyllabusViewFragment();
                         break;
                     default:
                         fragment = new NotesAndHwFragment();

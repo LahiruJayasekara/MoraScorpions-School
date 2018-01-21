@@ -25,18 +25,18 @@ public class NotificationService extends IntentService {
 
     private void loadMessages() {
         mRootRef = FirebaseDatabase.getInstance().getReference();
-        mRootRef.child("messages").child("1f1c4de9-b42d-485c-b8f1-de28059aac36")
+        mRootRef.child("messages").child("8121b123-2cee-4268-9b7f-ebb01888c8c6").child("0f436fbe-0129-48ff-9cc8-2fc4e608faad")
                 .addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         MessageItem message = dataSnapshot.getValue(MessageItem.class);
-                        Toast.makeText(getBaseContext(), "received" + message.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "received" + message.getBody(),Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                         MessageItem message = dataSnapshot.getValue(MessageItem.class);
-                        Toast.makeText(getBaseContext(), "received" + message.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "received" + message.getBody(),Toast.LENGTH_LONG).show();
                     }
 
                     @Override

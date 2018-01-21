@@ -18,10 +18,14 @@ public class MessagesAdapter  extends RecyclerView.Adapter<MessagesAdapter.ViewH
 
     private List<MessageItem> messageItems;
     private Context context;
+    private User currentUser;
+    private String receiverName;
 
-    public MessagesAdapter(List<MessageItem> messageItems, Context context) {
+    public MessagesAdapter(List<MessageItem> messageItems, Context context, String receiverName) {
         this.messageItems = messageItems;
         this.context = context;
+        this.receiverName = receiverName;
+        currentUser = new UserLocalStore(context).getUserDetails();
     }
 
     @Override
@@ -34,10 +38,11 @@ public class MessagesAdapter  extends RecyclerView.Adapter<MessagesAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final MessageItem messageItem = messageItems.get(position);
-        holder.name.setText(messageItem.getSenderName());
-        holder.message.setText(messageItem.getMessage());
-        if(messageItem.getFrom().equals(new UserLocalStore(context).getUserDetails().getP_Id())){
-            Toast.makeText(context,"right",Toast.LENGTH_LONG).show();
+
+        holder.message.setText(messageItem.getBody());
+        if(messageItem.getSentBy().equals(new UserLocalStore(context).getUserDetails().getP_Id())){
+            holder.name.setText(currentUser.getName());
+            //Toast.makeText(context,"right",Toast.LENGTH_LONG).show();
             holder.linearLayout.setGravity(Gravity.RIGHT);
             holder.name.setGravity(Gravity.RIGHT);
             holder.message.setGravity(Gravity.RIGHT);
@@ -45,11 +50,13 @@ public class MessagesAdapter  extends RecyclerView.Adapter<MessagesAdapter.ViewH
             holder.cardViewMessage.setBackgroundColor(Color.parseColor("#72a6f9"));
             holder.cardViewMessage.setRadius(100);
         }else{
+            holder.name.setText(receiverName);
             holder.linearLayout.setGravity(Gravity.LEFT);
             holder.linearLayoutMessageItem.setBackgroundColor(Color.parseColor("#ffffff"));
             holder.cardViewMessage.setBackgroundColor(Color.parseColor("#ffffff"));
             holder.cardViewMessage.setRadius(100);
         }
+
     }
 
     @Override

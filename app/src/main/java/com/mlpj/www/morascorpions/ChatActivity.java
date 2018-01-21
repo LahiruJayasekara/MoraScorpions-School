@@ -50,7 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         mSenderId = mUserLocalStore.getUserDetails().getP_Id();
         mSenderName = mUserLocalStore.getUserDetails().getName();
 
-        Toast.makeText(this,"ttt " + mReceiverId + " " + mSenderId,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"ttt " + mReceiverId + " " + mSenderId,Toast.LENGTH_LONG).show();
 
         mRootRef = FirebaseDatabase.getInstance().getReference();
 
@@ -67,7 +67,7 @@ public class ChatActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mMessageItemsList = new ArrayList<>();
-        mMessageAdapter = new MessagesAdapter(mMessageItemsList, this);
+        mMessageAdapter = new MessagesAdapter(mMessageItemsList, this, mReceiverName);
         mRecyclerView.setAdapter(mMessageAdapter);
 
         loadMessages();
@@ -83,19 +83,31 @@ public class ChatActivity extends AppCompatActivity {
             String senderRef = "messages/" + mSenderId + "/" + mReceiverId;
             String receiverRef = "messages/" + mReceiverId + "/" + mSenderId;
 
-            String pushId = mRootRef.child("messages").child(mSenderId).child(mReceiverId)
+            String pushIdSender = mRootRef.child("messages").child(mSenderId).child(mReceiverId)
+                    .push().getKey();
+
+            String pushIdReceiver = mRootRef.child("messages").child(mReceiverId).child(mSenderId)
                     .push().getKey();
 
             Map messageMap = new HashMap();
-            messageMap.put("senderName",mSenderName);
-            messageMap.put("message",message);
+            //messageMap.put("senderName",mSenderName);
+            messageMap.put("body",message);
             messageMap.put("seen",false);
-            messageMap.put("time", ServerValue.TIMESTAMP);
-            messageMap.put("from", mSenderId);
+            messageMap.put("timestamp", ServerValue.TIMESTAMP);
+            messageMap.put("sentBy", mSenderId);
+            messageMap.put("senderMsgKey", pushIdReceiver);
+
+            Map messageMapReceiver = new HashMap();
+            //messageMap.put("senderName",mSenderName);
+            messageMapReceiver.put("body",message);
+            messageMapReceiver.put("seen",false);
+            messageMapReceiver.put("timestamp", ServerValue.TIMESTAMP);
+            messageMapReceiver.put("sentBy", mSenderId);
+            messageMapReceiver.put("senderMsgKey", pushIdSender);
 
             Map messageUserMap = new HashMap();
-            messageUserMap.put(senderRef + "/" + pushId, messageMap);
-            messageUserMap.put(receiverRef + "/" + pushId, messageMap);
+            messageUserMap.put(senderRef + "/" + pushIdSender, messageMap);
+            messageUserMap.put(receiverRef + "/" + pushIdReceiver, messageMapReceiver);
 
             mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                 @Override
@@ -120,9 +132,11 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                         MessageItem message = dataSnapshot.getValue(MessageItem.class);
+                        //Toast.makeText(getApplicationContext(),message.getBody().toString(),Toast.LENGTH_LONG).show();
                         mMessageItemsList.add(message);
                         mMessageAdapter.notifyDataSetChanged();
                         mRecyclerView.scrollToPosition(mMessageAdapter.getItemCount()-1);
+
                     }
 
                     @Override

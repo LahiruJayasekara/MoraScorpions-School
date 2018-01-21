@@ -1,5 +1,8 @@
 package com.mlpj.www.morascorpions;
 
+import com.mlpj.www.morascorpions.Syllabus.SubjectItem;
+import com.mlpj.www.morascorpions.Syllabus.SyllabusOutLineItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +43,8 @@ public interface ApiClient {
     @GET("/api/TeacherDetails/GetAllParentOfAClass/{className}")
     Call<ArrayList<ChatItem>> getAllParentsOfClass(@Path("className") String className);
 
-    @GET("/api/Parent/GetTeachersOfAStudent/{teacherPID}")
-    Call<ArrayList<ChatItem>> getAllTeachersOfStudent(@Path("teacherPID") String teacherPID);
+    @GET("/api/Parent/GetTeachersOfAStudent/{parentPID}")
+    Call<ArrayList<ChatItem>> getAllTeachersOfStudent(@Path("parentPID") String parentPID);
 
     @GET("/api/TeacherDetails/SubjectClassesOfTeacher/{teacherPID}")
     Call<ArrayList<ClassSubjectOfTeacher>> getSubjectClassesOfTeacher(@Path("teacherPID") String teacherPID);
@@ -60,5 +63,14 @@ public interface ApiClient {
 
     @GET("/api/AttendanceDetails/GetAttendancePercentageOfAParentStd/{p_Id}")
     Call<Float> getAttendancePercentageStudentForParent(@Path("p_Id") String p_Id);
+
+    @GET("/api/Subject/GetAllSubjectOfAStudent/{p_Id}")
+    Call<ArrayList<SubjectItem>> getSubjectsOfAStudent(@Path("p_Id") String p_Id);
+
+    @GET("/api/OutlineSyllabus/GetSyllabusesByStudent/{subject}/{className}")
+    Call<ArrayList<SyllabusOutLineItem>> getSyllabusForStudent(@Path("subject") String subject, @Path("className") String className);
+
+    @GET("/api/OutlineSyllabus/GetSyllabusesByParent/{p_Id}/{subject}")
+    Call<ArrayList<SyllabusOutLineItem>> getSyllabusForParent(@Path("p_Id") String p_Id, @Path("subject") String subject);
 
 }
