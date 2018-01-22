@@ -19,6 +19,8 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mlpj.www.morascorpions.ComplainHandling.ParentComplainViewFragment;
+import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherComplainViewFragment;
 import com.mlpj.www.morascorpions.Syllabus.SyllabusViewFragment;
 import com.squareup.picasso.Picasso;
 
@@ -50,8 +52,8 @@ public class UserAreaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_area);
 
-        Intent intent = new Intent(this, NotificationService.class);
-        //startService(intent);
+        Intent intent = new Intent(getBaseContext(), NotificationService.class);
+        startService(intent);
 
         mUserLocalStore = new UserLocalStore(this);
         mCurrentUser = mUserLocalStore.getUserDetails();
@@ -133,6 +135,9 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.teacherProfile:
                         fragment = new TeacherProfileFragment();
                         break;
+                    case R.id.teacherComplains:
+                        fragment = new PrincipalAndTeacherComplainViewFragment();
+                        break;
                     case R.id.parentHome:
                         fragment = new ParentHomeFragment();
                         break;
@@ -151,6 +156,9 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.parentSyllabus:
                         fragment = new SyllabusViewFragment();
                         break;
+                    case R.id.parentComplains:
+                        fragment = new ParentComplainViewFragment();
+                        break;
                     case R.id.studentHome:
                         fragment = new StudentHomeFragment();
                         break;
@@ -162,6 +170,9 @@ public class UserAreaActivity extends AppCompatActivity {
                         break;
                     case R.id.studentSyllabus:
                         fragment = new SyllabusViewFragment();
+                        break;
+                    case R.id.principalComplains:
+                        fragment = new PrincipalAndTeacherComplainViewFragment();
                         break;
                     default:
                         fragment = new NotesAndHwFragment();
@@ -204,6 +215,7 @@ public class UserAreaActivity extends AppCompatActivity {
                 break;
             case "Principal":
                 mNavigationView.inflateMenu(R.menu.menu_principal_navigation_drawer);
+                fragment = new PrincipalHomeFragment();
                 break;
             case "Teacher":
                 mNavigationView.inflateMenu(R.menu.menu_teacher_navigation_drawer);

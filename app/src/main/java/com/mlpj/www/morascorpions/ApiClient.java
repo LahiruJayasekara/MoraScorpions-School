@@ -1,5 +1,7 @@
 package com.mlpj.www.morascorpions;
 
+import com.mlpj.www.morascorpions.ComplainHandling.ComplainItem;
+import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherDetalis;
 import com.mlpj.www.morascorpions.Syllabus.SubjectItem;
 import com.mlpj.www.morascorpions.Syllabus.SyllabusOutLineItem;
 
@@ -73,4 +75,18 @@ public interface ApiClient {
     @GET("/api/OutlineSyllabus/GetSyllabusesByParent/{p_Id}/{subject}")
     Call<ArrayList<SyllabusOutLineItem>> getSyllabusForParent(@Path("p_Id") String p_Id, @Path("subject") String subject);
 
+    @GET("/api/complain/GetAllComplainByComplainerId/{p_Id}")
+    Call<ArrayList<ComplainItem>> getComplainsForParent(@Path("p_Id") String p_Id);
+
+    @GET("/api/complain/GetByParentId/{p_Id}")
+    Call<PrincipalAndTeacherDetalis> getTeacherAndPrincipalForComplain(@Path("p_Id") String p_Id);
+
+    @POST("/api/complain")
+    Call<Void> makeComplain(@Body ComplainItem complainItem);
+
+    @GET("/api/complain/GetAllComplainByComplaineeId/{p_Id}")
+    Call<ArrayList<ComplainItem>> getComplainsForPrincipalAndTeacher(@Path("p_Id") String p_Id);
+
+    @POST("/api/complain/UpdateAction")
+    Call<Void> takeAction(@Body ComplainItem complainItem);
 }

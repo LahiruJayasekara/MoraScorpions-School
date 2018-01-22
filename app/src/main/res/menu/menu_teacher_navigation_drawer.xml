@@ -5,6 +5,7 @@
         <item android:id="@+id/teacherProfile" android:title="@string/profile" android:icon="@drawable/ic_profile_black"/>
         <item android:id="@+id/teacherMarkAttendance" android:title="@string/mark_attendance" android:icon="@drawable/ic_mark_attendance"/>
         <item android:id="@+id/teacherChat" android:title="@string/instant_chat_with_parents" android:icon="@drawable/ic_chat_black"/>
+        <item android:id="@+id/teacherComplains" android:title="Complains" android:icon="@drawable/ic_label_outline_black"/>
 
     </group>
     <group android:id="@+id/teacherClassesGroup">

@@ -82,16 +82,19 @@ public class LoginActivity extends AppCompatActivity {
             call.enqueue(new Callback<ArrayList<User>>() {
                 @Override
                 public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
-                    mProgressDialog.dismiss();
-                    User user = response.body().get(0);
-                    userLocalStore.setUserLoggedIn(true);
-                    userLocalStore.setUserDetails(user);
+                    if(response != null && response.body().size() != 0){
+                        mProgressDialog.dismiss();
+                        User user = response.body().get(0);
+                        userLocalStore.setUserLoggedIn(true);
+                        userLocalStore.setUserDetails(user);
 
-                    Toast.makeText(getApplicationContext(),user.getP_Id(),Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        Toast.makeText(LoginActivity.this,"Connection Error",Toast.LENGTH_LONG).show();
+                    }
 
-                    Intent intent = new Intent(getApplicationContext(), UserAreaActivity.class);
-                    startActivity(intent);
-                    finish();
                 }
 
                 @Override

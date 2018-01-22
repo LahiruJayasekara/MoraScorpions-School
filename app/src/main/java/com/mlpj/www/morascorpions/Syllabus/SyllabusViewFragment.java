@@ -154,11 +154,8 @@ public class SyllabusViewFragment extends Fragment {
                         mRecyclerViewSyllabus.setAdapter(syllabusAdapter);
                         donutProgress.setVisibility(View.INVISIBLE);
                         syllabusProgress.setVisibility(View.INVISIBLE);
-
                     }
-
                 }
-
                 @Override
                 public void onFailure(Call<ArrayList<SyllabusOutLineItem>> call, Throwable t) {
                     mProgressDialog.dismiss();
@@ -194,9 +191,7 @@ public class SyllabusViewFragment extends Fragment {
                         mRecyclerViewSyllabus.setAdapter(syllabusAdapter);
                         donutProgress.setVisibility(View.INVISIBLE);
                         syllabusProgress.setVisibility(View.INVISIBLE);
-
                     }
-
                 }
 
                 @Override
@@ -206,6 +201,5 @@ public class SyllabusViewFragment extends Fragment {
                 }
             });
         }
-
     }
 }

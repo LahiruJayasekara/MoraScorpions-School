@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,6 +83,9 @@ public class ChatActivity extends AppCompatActivity {
         if(!TextUtils.isEmpty(message)){
             String senderRef = "messages/" + mSenderId + "/" + mReceiverId;
             String receiverRef = "messages/" + mReceiverId + "/" + mSenderId;
+            //String notificationSenderRef = "notifications/" + "chat/" + mSenderId + "/" + mReceiverId;
+            String notificationReceiverRef = "notifications/" + "chat/" + mReceiverId + "/" + mSenderId;
+
 
             String pushIdSender = mRootRef.child("messages").child(mSenderId).child(mReceiverId)
                     .push().getKey();
@@ -108,6 +112,8 @@ public class ChatActivity extends AppCompatActivity {
             Map messageUserMap = new HashMap();
             messageUserMap.put(senderRef + "/" + pushIdSender, messageMap);
             messageUserMap.put(receiverRef + "/" + pushIdReceiver, messageMapReceiver);
+            //messageUserMap.put(notificationSenderRef, messageMap);
+            messageUserMap.put(notificationReceiverRef, messageMapReceiver);
 
             mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
                 @Override
@@ -122,6 +128,46 @@ public class ChatActivity extends AppCompatActivity {
                     mImageBtnSend.setBackgroundColor(Color.parseColor("#ffffff"));
                 }
             });
+/*
+            String notificationSenderRef = "notifications/" + mSenderId + "/" + mReceiverId;
+            String notificationReceiverRef = "notifications/" + mReceiverId + "/" + mSenderId;
+
+
+
+            Map notificationMap = new HashMap();
+            //messageMap.put("senderName",mSenderName);
+            notificationMap.put("body",message);
+            notificationMap.put("seen",false);
+            notificationMap.put("timestamp", ServerValue.TIMESTAMP);
+            notificationMap.put("sentBy", mSenderId);
+            notificationMap.put("senderMsgKey", pushIdReceiver);
+
+            Map messageMapReceiver = new HashMap();
+            //messageMap.put("senderName",mSenderName);
+            messageMapReceiver.put("body",message);
+            messageMapReceiver.put("seen",false);
+            messageMapReceiver.put("timestamp", ServerValue.TIMESTAMP);
+            messageMapReceiver.put("sentBy", mSenderId);
+            messageMapReceiver.put("senderMsgKey", pushIdSender);
+
+            Map messageUserMap = new HashMap();
+            messageUserMap.put(senderRef + "/" + pushIdSender, messageMap);
+            messageUserMap.put(receiverRef + "/" + pushIdReceiver, messageMapReceiver);
+
+            mRootRef.updateChildren(messageUserMap, new DatabaseReference.CompletionListener() {
+                @Override
+                public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+
+                    if(databaseError != null){
+                        Toast.makeText(getApplicationContext(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+                    }else{
+                        mEtMessage.setText("");
+                    }
+                    mImageBtnSend.setClickable(true);
+                    mImageBtnSend.setBackgroundColor(Color.parseColor("#ffffff"));
+                }
+            });
+            */
         }
 
     }
@@ -159,5 +205,6 @@ public class ChatActivity extends AppCompatActivity {
 
                     }
                 });
+        mRootRef.child("notifications").child("chat").child(mSenderId).child(mReceiverId).child("seen").setValue(true);
     }
 }

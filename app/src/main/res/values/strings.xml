@@ -28,4 +28,10 @@
     <string name="base_url_azure2">http://sclmanagement.azurewebsites.net/</string>
     <string name="base_url_azure">http://morascorpionsschoolmanagement.azurewebsites.net/</string>
     <string name="profile">Profile</string>
+
+    <string-array name="complainee">
+        <item>Principal</item>
+        <item>Class Teacher</item>
+    </string-array>
+
 </resources>
