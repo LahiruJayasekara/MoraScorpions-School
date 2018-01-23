@@ -7,35 +7,55 @@ package com.mlpj.www.morascorpions;
 
 public class CommentItem {
 
-    private int id;
-    private String url;
-    private String commentedPersonName;
-    private String comment;
+    private int noteId;
+    private int commentId;
     private String commentedTime;
+    private String content;
+    private String userId;
+    private String name;
+    private String image;
 
-
-    public CommentItem(String url, String commentedPersonName, String comment, String commentedTime) {
-        this.url = url;
-        this.commentedPersonName = commentedPersonName;
-        this.comment = comment;
+    public CommentItem(int commentId, String commentedTime, String content, String userId, String name, String image) {
+        this.commentId = commentId;
         this.commentedTime = commentedTime;
+        this.content = content;
+        this.userId = userId;
+        this.name = name;
+        this.image = image;
     }
 
-    public String getUrl() {
-        return url;
+    public CommentItem(int noteId, String content, String userId) {
+        this.noteId = noteId;
+        this.content = content;
+        this.userId = userId;
     }
 
-    public String getCommentedPersonName() {
-        return commentedPersonName;
-    }
-
-    public String getComment() {
-        return comment;
+    public int getCommentId() {
+        return commentId;
     }
 
     public String getCommentedTime() {
-        return commentedTime;
+        String[] parts = commentedTime.split("T");
+        return parts[0];
     }
 
+    public String getContent() {
+        return content;
+    }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public int getNoteId() {
+        return noteId;
+    }
 }

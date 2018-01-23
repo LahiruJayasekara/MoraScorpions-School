@@ -3,12 +3,9 @@ package com.mlpj.www.morascorpions.ComplainHandling;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,11 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.mlpj.www.morascorpions.ApiClient;
-import com.mlpj.www.morascorpions.CommentsAdapter;
-import com.mlpj.www.morascorpions.NoteItem;
-import com.mlpj.www.morascorpions.NotesAdapter;
 import com.mlpj.www.morascorpions.R;
-import com.mlpj.www.morascorpions.UploadNotesActivity;
 import com.mlpj.www.morascorpions.User;
 import com.mlpj.www.morascorpions.UserLocalStore;
 
@@ -80,8 +73,8 @@ public class ParentComplainViewFragment extends Fragment {
     }
 
     public void loadComplains(){
-        mProgressDialog.setTitle("Logging In...");
-        mProgressDialog.setMessage("Please wait for the Authentication!");
+        mProgressDialog.setTitle("Loading...");
+        mProgressDialog.setMessage("Please wait...!");
         mProgressDialog.show();
 
         Retrofit.Builder builder = new Retrofit.Builder()
@@ -100,10 +93,10 @@ public class ParentComplainViewFragment extends Fragment {
                 if(response.body()!=null && response.body().size()!=0){
 
                     mComplainItems = response.body();
-                    mComplainAdapter = new ParentComplainAdapter(mComplainItems,getContext());
+                    mComplainAdapter = new ComplainAdapter(mComplainItems,getContext());
                     mRecyclerView.setAdapter(mComplainAdapter);
                 }else{
-                    Toast.makeText(getContext(),"Error Loading Data ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"No Complains to view ", Toast.LENGTH_LONG).show();
                 }
 
             }

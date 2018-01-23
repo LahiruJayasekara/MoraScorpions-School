@@ -27,6 +27,12 @@ public class AttendanceDetail implements Serializable{
         this.date = date;
     }
 
+    public AttendanceDetail(String p_Id, String name) {
+        this.p_Id = p_Id;
+        this.name = name;
+        this.presentAbsent = false;
+    }
+
     public String getP_Id() {
         return p_Id;
     }
@@ -46,4 +52,5 @@ public class AttendanceDetail implements Serializable{
     public void setPresentAbsent(boolean presentAbsent) {
         this.presentAbsent = presentAbsent;
     }
+
 }

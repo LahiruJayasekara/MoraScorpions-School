@@ -26,14 +26,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class NotesHwPagerAdapter extends FragmentStatePagerAdapter{
-    private int ternaryId;
+    //private int ternaryId;
     private List<HwItem> hwList;
+    private List<NoteItem> noteItems;
     private HwListSerializable hwListSerializable;
-    public NotesHwPagerAdapter(FragmentManager fm, int ternaryId, List<HwItem> hwList) {
+    private NoteListSerializable noteListSerializable;
+    public NotesHwPagerAdapter(FragmentManager fm, List<HwItem> hwList, List<NoteItem> noteItems) {
         super(fm);
-        this.ternaryId = ternaryId;
         this.hwList = hwList;
+        this.noteItems = noteItems;
         hwListSerializable = new HwListSerializable(hwList);
+        noteListSerializable = new NoteListSerializable(noteItems);
+
         }
 
     @Override
@@ -42,17 +46,20 @@ public class NotesHwPagerAdapter extends FragmentStatePagerAdapter{
         switch (position){
             case 0:
                 fragment = new NotesFragment();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("noteList",noteListSerializable);
+                fragment.setArguments(bundle);
                 break;
             case 1:
                 fragment = new HwFragment();
+                Bundle bundle2 = new Bundle();
+                bundle2.putSerializable("hwList",hwListSerializable);
+                fragment.setArguments(bundle2);
                 break;
             default:
                 fragment = null;
         }
-        Bundle bundle = new Bundle();
-        bundle.putInt("ternaryId", ternaryId);
-        bundle.putSerializable("hwList",hwListSerializable);
-        fragment.setArguments(bundle);
+
         return fragment;
     }
 

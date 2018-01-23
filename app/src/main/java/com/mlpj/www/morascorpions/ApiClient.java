@@ -2,6 +2,7 @@ package com.mlpj.www.morascorpions;
 
 import com.mlpj.www.morascorpions.ComplainHandling.ComplainItem;
 import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherDetalis;
+import com.mlpj.www.morascorpions.NoticeHandling.NoticeItem;
 import com.mlpj.www.morascorpions.Syllabus.SubjectItem;
 import com.mlpj.www.morascorpions.Syllabus.SyllabusOutLineItem;
 
@@ -89,4 +90,26 @@ public interface ApiClient {
 
     @POST("/api/complain/UpdateAction")
     Call<Void> takeAction(@Body ComplainItem complainItem);
+
+    @GET("/api/notice/")
+    Call<ArrayList<NoticeItem>> getNoticesForPrincipal();
+
+    @POST("/api/notice")
+    Call<Void> addNotice(@Body NoticeItem noticeItem);
+
+    @GET("/api/notice/NoticesGetById/{p_Id}")
+    Call<ArrayList<NoticeItem>> getNoticesForUsers(@Path("p_Id") String p_Id);
+
+    @GET("/api/note/GetByTernaryId/{ternaryId}")
+    Call<ArrayList<NoteItem>> getNotesForTeacher(@Path("ternaryId") int ternaryId);
+
+    @GET("/api/note/GetCommentsByNoteId/{noteId}")
+    Call<ArrayList<CommentItem>> getComments(@Path("noteId") int noteId);
+
+    @POST("/api/note/AddAComment")
+    Call<Void> submitComment(@Body CommentItem commentItem);
+
+    @GET("/api/note/GetNotesByStudentClassandSub/{className}/{subName}")
+    Call<ArrayList<NoteItem>> getNotesForStudent(@Path("className") String className, @Path("subName") String subName);
+
 }

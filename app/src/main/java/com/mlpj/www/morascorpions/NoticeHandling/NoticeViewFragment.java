@@ -1,8 +1,10 @@
-package com.mlpj.www.morascorpions.ComplainHandling;
+package com.mlpj.www.morascorpions.NoticeHandling;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,41 +27,26 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class PrincipalAndTeacherComplainViewFragment extends Fragment {
-
-    private RecyclerView.Adapter mComplainAdapter;
+public class NoticeViewFragment extends Fragment {
+    private RecyclerView.Adapter mNoticeAdapter;
     private RecyclerView mRecyclerView;
-    private List<ComplainItem> mComplainItems;
-    private User mCurrentUser;
+    private List<NoticeItem> mNoticeItems;
     private ProgressDialog mProgressDialog;
-
-
+    private User mCurrentUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_principal_and_teacher_complain_view, container, false);
+        View view = inflater.inflate(R.layout.fragment_notice_view, container, false);
 
-        mComplainItems = new ArrayList<>();
-        mRecyclerView = view.findViewById(R.id.complainRecyclerViewPrincipalTeacher);
+
+        mNoticeItems = new ArrayList<>();
+        mRecyclerView = view.findViewById(R.id.noticeRecyclerView);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mCurrentUser = new UserLocalStore(getContext()).getUserDetails();
 
         mProgressDialog = new ProgressDialog(getContext());
-        loadComplains();
-
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        loadComplains();
-
-    }
-
-    public void loadComplains(){
         mProgressDialog.setTitle("Loading...");
         mProgressDialog.setMessage("Please wait...!");
         mProgressDialog.show();
@@ -71,29 +58,35 @@ public class PrincipalAndTeacherComplainViewFragment extends Fragment {
         Retrofit retrofit = builder.build();
 
         ApiClient client = retrofit.create(ApiClient.class);
-        Call<ArrayList<ComplainItem>> call =  client.getComplainsForPrincipalAndTeacher(mCurrentUser.getP_Id());
+        Call<ArrayList<NoticeItem>> call =  client.getNoticesForUsers(mCurrentUser.getP_Id());
 
-        call.enqueue(new Callback<ArrayList<ComplainItem>>() {
+        call.enqueue(new Callback<ArrayList<NoticeItem>>() {
             @Override
-            public void onResponse(Call<ArrayList<ComplainItem>> call, Response<ArrayList<ComplainItem>> response) {
+            public void onResponse(Call<ArrayList<NoticeItem>> call, Response<ArrayList<NoticeItem>> response) {
                 mProgressDialog.dismiss();
+
                 if(response.body()!=null && response.body().size()!=0){
 
-                    mComplainItems = response.body();
-                    mComplainAdapter = new ComplainAdapter(mComplainItems, getContext());
-                    mRecyclerView.setAdapter(mComplainAdapter);
+                    mNoticeItems = response.body();
+                    mNoticeAdapter = new NoticeAdapter(mNoticeItems);
+                    mRecyclerView.setAdapter(mNoticeAdapter);
                 }else{
-                    Toast.makeText(getContext(),"No Complains to view ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Error Loading Data ", Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
-            public void onFailure(Call<ArrayList<ComplainItem>> call, Throwable t) {
-                mProgressDialog.dismiss();
-                Toast.makeText(getContext(),"Error Loading data " + t.getMessage(), Toast.LENGTH_LONG).show();
+            public void onFailure(Call<ArrayList<NoticeItem>> call, Throwable t) {
+                Toast.makeText(getContext(),"Error Loading Data " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
+
+
+        return view;
     }
+
+
+
 }

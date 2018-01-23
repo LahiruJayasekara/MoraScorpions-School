@@ -1,13 +1,110 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mlpj.www.morascorpions.TeacherHomeFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.mlpj.www.morascorpions.TeacherHomeFragment"
+    android:orientation="vertical"
+    android:background="@color/gray">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Teacher Home" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="5dp"
+        android:text="Welcome To MoraScorpions"
+        android:textColor="@android:color/black"
+        android:textSize="25dp" />
 
-</FrameLayout>
+    <android.support.v7.widget.CardView
+        android:id="@+id/teacherProfileBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@android:color/holo_blue_bright">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="View Profile"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/teacherMarkAttendanceBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@android:color/holo_blue_bright">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="MarkAttendance"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/teacherNoticeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@android:color/holo_blue_bright">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="View Notices"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/teacherChatBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@android:color/holo_blue_bright">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Instance Chat with Parents"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/teacherComplainBtn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="15dp"
+        app:cardBackgroundColor="@android:color/holo_blue_bright">
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="View Complains"
+            android:textColor="@android:color/black"
+            android:textSize="20dp"/>
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="powered by MorScorpions"
+        android:gravity="bottom"
+        android:layout_gravity="center"/>
+</LinearLayout>

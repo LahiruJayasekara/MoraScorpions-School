@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mlpj.www.morascorpions.HwAdapter;
 import com.mlpj.www.morascorpions.R;
 import com.mlpj.www.morascorpions.User;
 import com.mlpj.www.morascorpions.UserLocalStore;
@@ -21,13 +20,13 @@ import java.util.List;
  * All Rights Reserved by MLPJ©
  */
 
-public class ParentComplainAdapter extends RecyclerView.Adapter<ParentComplainAdapter.ViewHolder>{
+public class ComplainAdapter extends RecyclerView.Adapter<ComplainAdapter.ViewHolder>{
 
     private List<ComplainItem> complainItems;
     private User mCurrentUser;
     private Context context;
 
-    public ParentComplainAdapter(List<ComplainItem> complainItems, Context context) {
+    public ComplainAdapter(List<ComplainItem> complainItems, Context context) {
         this.complainItems = complainItems;
         this.context = context;
         mCurrentUser = new UserLocalStore(context).getUserDetails();
@@ -37,7 +36,7 @@ public class ParentComplainAdapter extends RecyclerView.Adapter<ParentComplainAd
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.complain_card_view,parent,false);
-        return new ParentComplainAdapter.ViewHolder(v);
+        return new ComplainAdapter.ViewHolder(v);
     }
 
     @Override

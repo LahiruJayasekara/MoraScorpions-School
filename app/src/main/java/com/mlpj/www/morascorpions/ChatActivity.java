@@ -31,6 +31,7 @@ public class ChatActivity extends AppCompatActivity {
     private String mSenderId;
     private String mReceiverName;
     private String mSenderName;
+    private String mSentImage;
     private UserLocalStore mUserLocalStore;
     private ImageButton mImageBtnSend;
     private EditText mEtMessage;
@@ -50,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
         mUserLocalStore = new UserLocalStore(this);
         mSenderId = mUserLocalStore.getUserDetails().getP_Id();
         mSenderName = mUserLocalStore.getUserDetails().getName();
+        mSentImage = mUserLocalStore.getUserDetails().getPicUrl();
 
         //Toast.makeText(this,"ttt " + mReceiverId + " " + mSenderId,Toast.LENGTH_LONG).show();
 
@@ -95,18 +97,22 @@ public class ChatActivity extends AppCompatActivity {
 
             Map messageMap = new HashMap();
             //messageMap.put("senderName",mSenderName);
+            messageMap.put("SentImage",mSentImage);
             messageMap.put("body",message);
             messageMap.put("seen",false);
             messageMap.put("timestamp", ServerValue.TIMESTAMP);
             messageMap.put("sentBy", mSenderId);
+            messageMap.put("sentName", mSenderName);
             messageMap.put("senderMsgKey", pushIdReceiver);
 
             Map messageMapReceiver = new HashMap();
             //messageMap.put("senderName",mSenderName);
+            messageMapReceiver.put("SentImage",mSentImage);
             messageMapReceiver.put("body",message);
             messageMapReceiver.put("seen",false);
             messageMapReceiver.put("timestamp", ServerValue.TIMESTAMP);
             messageMapReceiver.put("sentBy", mSenderId);
+            messageMapReceiver.put("sentName", mSenderName);
             messageMapReceiver.put("senderMsgKey", pushIdSender);
 
             Map messageUserMap = new HashMap();
@@ -169,7 +175,6 @@ public class ChatActivity extends AppCompatActivity {
             });
             */
         }
-
     }
 
     private void loadMessages() {

@@ -6,21 +6,25 @@ package com.mlpj.www.morascorpions;
  */
 
 public class MessageItem {
+    private String SentImage;
     private String body;
     private boolean seen;
     private String senderMsgKey;
     private String sentBy;
+    private String sentName;
     private long timestamp;
 
 
 
     public MessageItem(){}
 
-    public MessageItem(String body, boolean seen, String senderMsgKey, String sentBy, long timestamp) {
+    public MessageItem(String SentImage, String body, boolean seen, String senderMsgKey, String sentBy, String sentName, long timestamp) {
+        SentImage = SentImage;
         this.body = body;
         this.seen = seen;
         this.senderMsgKey = senderMsgKey;
         this.sentBy = sentBy;
+        this.sentName = sentName;
         this.timestamp = timestamp;
     }
 
@@ -42,5 +46,13 @@ public class MessageItem {
 
     public long getTimestamp() {
         return timestamp;
+    }
+
+    public String getSentImage() {
+        return SentImage;
+    }
+
+    public String getSentName() {
+        return sentName;
     }
 }

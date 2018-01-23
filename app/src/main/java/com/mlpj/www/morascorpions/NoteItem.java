@@ -9,56 +9,60 @@ import java.io.Serializable;
 
 public class NoteItem implements Serializable{
 
-    private int noteId = -1;
-    private int classId;        //need?
-    private String noteDate;
+    private int noteId;
     private String noteTitle;
-    private String noteDescription;
-    private String noteFileName;
     private String noteUrl;
-    private boolean noteVisible;
+    private String description;
+    private boolean visibility;
+    private String uploadedDate;
+    private String lastUpdatedDate;
 
-    public NoteItem(int noteId, int classId, String noteDate, String noteTitle, String noteDescription, String noteFileName, boolean noteVisible) {
+    public NoteItem(int noteId, String noteTitle, String noteUrl, String description, boolean visibility, String uploadedDate, String lastUpdatedDate) {
         this.noteId = noteId;
-        this.classId = classId;
-        this.noteDate = noteDate;
         this.noteTitle = noteTitle;
-        this.noteDescription = noteDescription;
-        this.noteFileName = noteFileName;
-        this.noteVisible = noteVisible;
+        this.noteUrl = noteUrl;
+        this.description = description;
+        this.visibility = visibility;
+        this.uploadedDate = uploadedDate;
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 
-    public NoteItem(String noteDate, String noteTitle, String noteDescription, String noteFileName, boolean noteVisible) {
-        this.noteDate = noteDate;
+    public NoteItem(int noteId, String noteTitle, String noteUrl, String description, String uploadedDate, String lastUpdatedDate) {
+        this.noteId = noteId;
         this.noteTitle = noteTitle;
-        this.noteDescription = noteDescription;
-        this.noteFileName = noteFileName;
-        this.noteVisible = noteVisible;
+        this.noteUrl = noteUrl;
+        this.description = description;
+        this.uploadedDate = uploadedDate;
+        this.lastUpdatedDate = lastUpdatedDate;
     }
 
-    public int getNoteId() { return noteId; }
-
-    public String getNoteDate() {
-        return noteDate;
+    public int getNoteId() {
+        return noteId;
     }
 
     public String getNoteTitle() {
         return noteTitle;
     }
 
-    public String getNoteDescription() {
-        return noteDescription;
-    }
-
-    public String getNoteFileName() {
-        return noteFileName;
-    }
-
     public String getNoteUrl() {
         return noteUrl;
     }
 
-    public boolean isNoteVisible() {
-        return noteVisible;
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isVisibility() {
+        return visibility;
+    }
+
+    public String getUploadedDate() {
+        String[] parts = uploadedDate.split("T");
+        return parts[0];
+    }
+
+    public String getLastUpdatedDate() {
+        String[] parts = lastUpdatedDate.split("T");
+        return parts[0];
     }
 }

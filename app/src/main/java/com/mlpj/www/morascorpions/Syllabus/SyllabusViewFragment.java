@@ -145,7 +145,6 @@ public class SyllabusViewFragment extends Fragment {
                         int percentage = count*100/mSyllabusOutLineList.size();
                         donutProgress.setProgress(percentage);
 
-                        Toast.makeText(getContext(), count + " " + percentage + " " + mSyllabusOutLineList.size(), Toast.LENGTH_LONG).show();
 
                     }else {
                         Toast.makeText(getContext(), "No Outline specified", Toast.LENGTH_LONG).show();

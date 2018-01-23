@@ -47,24 +47,22 @@ public class NotificationService extends IntentService {
                             notification = new NotificationCompat.Builder(getBaseContext(),"chat");
                             notification.setAutoCancel(true);
 
-                            notification.setSmallIcon(R.drawable.ic_chat_black);
-                            notification.setTicker("New Messages On Mora Scorpions");
+                            notification.setSmallIcon(R.drawable.icon);
+                            notification.setTicker("New Messages From " + message.getSentName());
                             notification.setWhen(System.currentTimeMillis());
-                            notification.setContentTitle("You have new messages");
+                            notification.setContentTitle("New messages In Mora Scrorpions From " + message.getSentName());
                             notification.setContentText(message.getBody());
                             notification.setVibrate(new long[] { 0 });
                             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                             notification.setSound(alarmSound);
 
-                            if(mCurrentUser.getRoleName().equals("Teacher")){
-                                Intent intent = new Intent(getBaseContext(), TeacherChatFragment.class);
+                            //if(mCurrentUser.getRoleName().equals("Teacher")){
+                                Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+                                intent.putExtra("id", message.getSentBy());
+                                intent.putExtra("receiverName", message.getSentName());
                                 PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
                                 notification.setContentIntent(pendingIntent);
-                            }else{
-                                Intent intent = new Intent(getBaseContext(), ParentChatFragment.class);
-                                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                                notification.setContentIntent(pendingIntent);
-                            }
+
 
 
                             NotificationManager mNotificationManager = (NotificationManager) getSystemService(getBaseContext().NOTIFICATION_SERVICE);
@@ -83,25 +81,22 @@ public class NotificationService extends IntentService {
                             notification = new NotificationCompat.Builder(getBaseContext(),"chat");
                             notification.setAutoCancel(true);
 
-                            notification.setSmallIcon(R.drawable.ic_chat_black);
-                            notification.setTicker("New Messages On Mora Scorpions");
+                            notification.setSmallIcon(R.drawable.icon);
+                            //notification.setLargeIcon(R.mipmap.icon);
+                            notification.setTicker("New Messages From " + message.getSentName());
                             notification.setWhen(System.currentTimeMillis());
-                            notification.setContentTitle("You have new messages");
+                            notification.setContentTitle("New messages In Mora Scrorpions From " + message.getSentName());
                             notification.setContentText(message.getBody());
                             notification.setVibrate(new long[] { 0 });
                             Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
                             notification.setSound(alarmSound);
 
-                            if(mCurrentUser.getRoleName().equals("Teacher")){
-                                Intent intent = new Intent(getBaseContext(), TeacherChatFragment.class);
-                                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                                notification.setContentIntent(pendingIntent);
-                            }else{
-                                Intent intent = new Intent(getBaseContext(), ParentChatFragment.class);
-                                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-                                notification.setContentIntent(pendingIntent);
-                            }
-
+                            //if(mCurrentUser.getRoleName().equals("Teacher")){
+                            Intent intent = new Intent(getBaseContext(), ChatActivity.class);
+                            intent.putExtra("id", message.getSentBy());
+                            intent.putExtra("receiverName", message.getSentName());
+                            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),0,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+                            notification.setContentIntent(pendingIntent);
 
                             NotificationManager mNotificationManager = (NotificationManager) getSystemService(getBaseContext().NOTIFICATION_SERVICE);
 

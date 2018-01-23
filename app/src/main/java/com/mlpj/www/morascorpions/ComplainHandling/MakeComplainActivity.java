@@ -45,8 +45,8 @@ public class MakeComplainActivity extends AppCompatActivity {
         mSpinnerComplainee = findViewById(R.id.spinnerSelectComplainee);
 
         mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setTitle("Logging In...");
-        mProgressDialog.setMessage("Please wait for the Authentication!");
+        mProgressDialog.setTitle("Loading...");
+        mProgressDialog.setMessage("Please wait...!");
         mProgressDialog.show();
 
             Retrofit.Builder builder = new Retrofit.Builder()

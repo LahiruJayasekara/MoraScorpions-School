@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mlpj.www.morascorpions.ComplainHandling.ParentComplainViewFragment"
+    tools:context="com.mlpj.www.morascorpions.NoticeHandling.PrincipalNoticeFragment"
     android:orientation="vertical">
 
     <TextView
@@ -10,28 +10,25 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:gravity="center_horizontal"
-        android:text="Complains"
+        android:text="Notices"
         android:textColor="@android:color/black"
         android:textSize="21dp"
         android:textStyle="" />
 
     <android.support.v7.widget.RecyclerView
-
-        android:id="@+id/complainRecyclerView"
+        android:id="@+id/noticeRecyclerViewPrincipal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="35dp"
-        tools:layout_editor_absoluteX="40dp"
-        tools:layout_editor_absoluteY="103dp">
+        android:layout_marginTop="35dp">
 
     </android.support.v7.widget.RecyclerView>
 
-
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButtonComplains"
+        android:id="@+id/floatingActionButtonNotice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
         android:layout_margin="15dp"
         android:src="@drawable/ic_add_black" />
+
 </FrameLayout>

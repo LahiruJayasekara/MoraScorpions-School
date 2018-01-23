@@ -1,6 +1,7 @@
 package com.mlpj.www.morascorpions;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,38 +38,27 @@ public class CommentFragment extends DialogFragment {
     private EditText mEtComment;
     private ImageButton mImageButtonSendComment;
     private UserLocalStore userLocalStore;
-
-    public CommentFragment() {
-        // Required empty public constructor
-    }
-
-
+    private ProgressDialog mProgressDialog;
+    private int noteId;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_comment, container, false);
 
         Bundle args = getArguments();
-        int noteId = args.getInt("noteId", 0);  //use to get the comment details from the api method
-
+        noteId = args.getInt("noteId", 0);  //use to get the comment details from the api method
+        //oteid = noteId;
         mCommentItems = new ArrayList<>();
         mRecyclerViewComments = view.findViewById(R.id.recyclerViewComments);
         mRecyclerViewComments.setHasFixedSize(false);
         mRecyclerViewComments.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        mProgressDialog = new ProgressDialog(getContext());
+
+
         //code to get the comment details via noteId from api method
+        loadComments();
 
-
-
-
-
-
-        mCommentItems.add(new CommentItem(null,"Madhawa", "Hi there","2017-05-02 at 3.00 pm"));
-        mCommentItems.add(new CommentItem(null,"Ruchira", "Hello gf kjhsdf kjhsdfb kjhdb hbdch c","2017-06-05 at 5.00 pm"));
-        mCommentItems.add(new CommentItem(null,"Nuwan", "Hi there same here there by the way how are you","2017-05-31 at 3.30 am"));
-
-        mCommentsAdapter = new CommentsAdapter(mCommentItems, getContext());
-        mRecyclerViewComments.setAdapter(mCommentsAdapter);
 
         userLocalStore = new UserLocalStore(getContext());
         mEtComment = view.findViewById(R.id.etComment);
@@ -70,23 +66,92 @@ public class CommentFragment extends DialogFragment {
         mImageButtonSendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = null;  //take this from shared preferences
-                String commentedPersonName = userLocalStore.getUserDetails().getName();
-                String comment = mEtComment.getText().toString();
+                if(mEtComment.getText().toString().equals("")){
+                    mEtComment.setError("Can't be empty");
+                }else {
+                    mProgressDialog.setTitle("Submitting Comment...");
+                    mProgressDialog.setMessage("Please wait...!");
+                    mProgressDialog.show();
+                    String url = null;  //take this from shared preferences
+                    String commentedPersonName = userLocalStore.getUserDetails().getName();
+                    String comment = mEtComment.getText().toString();
 
-                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm a");//dd/MM/yyyy
-                Date now = new Date();
-                String strDate = sdfDate.format(now);
+                    SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd");//dd/MM/yyyy
+                    Date now = new Date();
+                    String strDate = sdfDate.format(now);
 
-                CommentItem newComment = new CommentItem(url,commentedPersonName,comment,strDate);
-                mCommentItems.add(newComment);
-                mCommentsAdapter.notifyDataSetChanged();
-                mEtComment.setText("");
-                //code to update database with noteId
-                //code to set a notification probably updating the notification database table
+                    CommentItem newComment = new CommentItem(noteId,comment,userLocalStore.getUserDetails().getP_Id());
+
+
+                    Retrofit.Builder builder = new Retrofit.Builder()
+                            //.baseUrl(getString(R.string.base_url_localhost))       //localhost
+                            .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                            .addConverterFactory(GsonConverterFactory.create());
+                    Retrofit retrofit = builder.build();
+
+                    ApiClient client = retrofit.create(ApiClient.class);
+                    Call<Void> call =  client.submitComment(newComment);
+
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            mProgressDialog.dismiss();
+                            Toast.makeText(getContext(),"Successfully Commented",Toast.LENGTH_LONG).show();
+                            loadComments();
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            mProgressDialog.dismiss();
+                            Toast.makeText(getContext(),"Connection Error" + t.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+
+                    //mCommentItems.add(newComment);
+                    //mCommentsAdapter.notifyDataSetChanged();
+                    mEtComment.setText("");
+                    //code to update database with noteId
+                    //code to set a notification probably updating the notification database table
+                }
             }
         });
         this.getDialog().setTitle("Comments...");
+
         return view;
+
+    }
+
+    public void loadComments(){
+        mProgressDialog.setTitle("Fetching Comments...");
+        mProgressDialog.setMessage("Please wait...!");
+        mProgressDialog.show();
+        Retrofit.Builder builder = new Retrofit.Builder()
+                //.baseUrl(getString(R.string.base_url_localhost))       //localhost
+                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+
+        ApiClient client = retrofit.create(ApiClient.class);
+        Call<ArrayList<CommentItem>> call =  client.getComments(noteId);
+
+        call.enqueue(new Callback<ArrayList<CommentItem>>() {
+            @Override
+            public void onResponse(Call<ArrayList<CommentItem>> call, Response<ArrayList<CommentItem>> response) {
+                mProgressDialog.dismiss();
+                if(response.body().size()!=0){
+                    mCommentItems = response.body();
+                    mCommentsAdapter = new CommentsAdapter(mCommentItems, getContext());
+                    mRecyclerViewComments.setAdapter(mCommentsAdapter);
+                }else{
+                    Toast.makeText(getContext(),"No Comments yet",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<CommentItem>> call, Throwable t) {
+                mProgressDialog.dismiss();
+                Toast.makeText(getContext(),"Connection Error" + t.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

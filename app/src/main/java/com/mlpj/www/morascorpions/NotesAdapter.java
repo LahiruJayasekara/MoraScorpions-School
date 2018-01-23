@@ -1,7 +1,9 @@
 package com.mlpj.www.morascorpions;
 
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
@@ -42,14 +44,14 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final NoteItem noteItem = noteItems.get(position);
-        holder.tvNoteDate.setText(noteItem.getNoteDate());
+        holder.tvNoteDate.setText(noteItem.getUploadedDate());
         holder.tvNoteTitle.setText(noteItem.getNoteTitle());
-        holder.tvNoteDescription.setText(noteItem.getNoteDescription());
-        holder.tvNoteFileName.setText(noteItem.getNoteFileName());
+        holder.tvNoteDescription.setText(noteItem.getDescription());
+        holder.tvNoteFileName.setText(noteItem.getNoteTitle() + ".pdf");
 
 
 
-        holder.linearLayoutNotes.setOnClickListener(new View.OnClickListener() {
+        holder.tvNoteTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -62,6 +64,16 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.ViewHolder>{
 
                     commentFragment.show(fragmentManager,"CommentDialog");
                 }
+            }
+        });
+        holder.tvNoteFileName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DownloadManager downloadManager = (DownloadManager)context.getSystemService(Context.DOWNLOAD_SERVICE);
+                Uri uri = Uri.parse(noteItem.getNoteUrl());
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                downloadManager.enqueue(request);
             }
         });
     }

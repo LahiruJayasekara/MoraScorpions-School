@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.mlpj.www.morascorpions.ComplainHandling.ParentComplainViewFragment;
 import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherComplainViewFragment;
+import com.mlpj.www.morascorpions.NotesHandling.StudentNotesViewFragment;
+import com.mlpj.www.morascorpions.NoticeHandling.NoticeViewFragment;
+import com.mlpj.www.morascorpions.NoticeHandling.PrincipalNoticeFragment;
 import com.mlpj.www.morascorpions.Syllabus.SyllabusViewFragment;
 import com.squareup.picasso.Picasso;
 
@@ -105,7 +108,6 @@ public class UserAreaActivity extends AppCompatActivity {
                     for(int i = 0; i < classSubjectList.size(); i++){
                         menu1.add(Menu.NONE,classSubjectList.get(i).getId(),Menu.NONE, classSubjectList.get(i).getClassRoomName() + " " + classSubjectList.get(i).getSubjectName()).setIcon(R.drawable.ic_navigate_next);
                     }
-
                 }
 
                 @Override
@@ -138,6 +140,9 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.teacherComplains:
                         fragment = new PrincipalAndTeacherComplainViewFragment();
                         break;
+                    case R.id.teacherNotice:
+                        fragment = new NoticeViewFragment();
+                        break;
                     case R.id.parentHome:
                         fragment = new ParentHomeFragment();
                         break;
@@ -159,6 +164,9 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.parentComplains:
                         fragment = new ParentComplainViewFragment();
                         break;
+                    case R.id.parentNotice:
+                        fragment = new NoticeViewFragment();
+                        break;
                     case R.id.studentHome:
                         fragment = new StudentHomeFragment();
                         break;
@@ -171,8 +179,20 @@ public class UserAreaActivity extends AppCompatActivity {
                     case R.id.studentSyllabus:
                         fragment = new SyllabusViewFragment();
                         break;
+                    case R.id.studentNotice:
+                        fragment = new NoticeViewFragment();
+                        break;
+                    case R.id.studentNotes:
+                        fragment = new StudentNotesViewFragment();
+                        break;
+                    case R.id.principalHome:
+                        fragment = new PrincipalHomeFragment();
+                        break;
                     case R.id.principalComplains:
                         fragment = new PrincipalAndTeacherComplainViewFragment();
+                        break;
+                    case R.id.principalNotice:
+                        fragment = new PrincipalNoticeFragment();
                         break;
                     default:
                         fragment = new NotesAndHwFragment();
@@ -257,6 +277,29 @@ public class UserAreaActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawers();
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        if(mCurrentUser.getRoleName().equals("Principal")){
+            Fragment fragment = new PrincipalHomeFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+        }
+        if(mCurrentUser.getRoleName().equals("Teacher")){
+            Fragment fragment = new TeacherHomeFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+        }
+        if(mCurrentUser.getRoleName().equals("Parent")){
+            Fragment fragment = new ParentHomeFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+        }
+        if(mCurrentUser.getRoleName().equals("Student")){
+            Fragment fragment = new StudentHomeFragment();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
+        }
     }
 
 
