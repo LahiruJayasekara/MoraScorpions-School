@@ -15,7 +15,6 @@ import com.mlpj.www.morascorpions.R;
 import com.mlpj.www.morascorpions.User;
 import com.mlpj.www.morascorpions.UserLocalStore;
 
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -50,8 +49,7 @@ public class MakeComplainActivity extends AppCompatActivity {
         mProgressDialog.show();
 
             Retrofit.Builder builder = new Retrofit.Builder()
-                    //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                    .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                    .baseUrl(getString(R.string.base_url_azure))
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
 
@@ -102,13 +100,12 @@ public class MakeComplainActivity extends AppCompatActivity {
                                 complaineeName
                         );
 
-                        //mProgressDialog = new ProgressDialog(getApplicationContext());
+
                         mProgressDialog.setTitle("Loading. . .");
                         mProgressDialog.setMessage("Please wait...!");
                         mProgressDialog.show();
                         Retrofit.Builder builder = new Retrofit.Builder()
-                                //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                                .baseUrl(getString(R.string.base_url_azure))
                                 .addConverterFactory(GsonConverterFactory.create());
                         Retrofit retrofit = builder.build();
 

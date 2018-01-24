@@ -1,20 +1,22 @@
 package com.mlpj.www.morascorpions;
 
+import com.mlpj.www.morascorpions.Attendance.AttendanceDetail;
+import com.mlpj.www.morascorpions.Chat.ChatItem;
+import com.mlpj.www.morascorpions.Comment.CommentItem;
 import com.mlpj.www.morascorpions.ComplainHandling.ComplainItem;
 import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherDetalis;
+import com.mlpj.www.morascorpions.NotesAndHwHandling.HwItem;
+import com.mlpj.www.morascorpions.NotesAndHwHandling.NoteItem;
 import com.mlpj.www.morascorpions.NoticeHandling.NoticeItem;
 import com.mlpj.www.morascorpions.Syllabus.SubjectItem;
 import com.mlpj.www.morascorpions.Syllabus.SyllabusOutLineItem;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;

@@ -1,6 +1,5 @@
 package com.mlpj.www.morascorpions.Syllabus;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.mlpj.www.morascorpions.HwAdapter;
 import com.mlpj.www.morascorpions.R;
 
 import java.util.List;

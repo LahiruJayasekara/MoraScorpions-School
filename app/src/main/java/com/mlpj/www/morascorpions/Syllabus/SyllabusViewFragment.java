@@ -59,8 +59,7 @@ public class SyllabusViewFragment extends Fragment {
         mCurrentUser = new UserLocalStore(getContext()).getUserDetails();
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
@@ -118,8 +117,7 @@ public class SyllabusViewFragment extends Fragment {
         mSyllabusOutLineList = new ArrayList<>();
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 
@@ -143,6 +141,8 @@ public class SyllabusViewFragment extends Fragment {
                             }
                         }
                         int percentage = count*100/mSyllabusOutLineList.size();
+                        syllabusProgress.setVisibility(View.VISIBLE);
+                        donutProgress.setVisibility(View.VISIBLE);
                         donutProgress.setProgress(percentage);
 
 
@@ -179,9 +179,9 @@ public class SyllabusViewFragment extends Fragment {
                             }
                         }
                         int percentage = count*100/mSyllabusOutLineList.size();
+                        syllabusProgress.setVisibility(View.VISIBLE);
+                        donutProgress.setVisibility(View.VISIBLE);
                         donutProgress.setProgress(percentage);
-
-                        Toast.makeText(getContext(), count + " " + percentage + " " + mSyllabusOutLineList.size(), Toast.LENGTH_LONG).show();
 
                     }else {
                         Toast.makeText(getContext(), "No Outline specified", Toast.LENGTH_LONG).show();

@@ -9,13 +9,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mlpj.www.morascorpions.ApiClient;
-import com.mlpj.www.morascorpions.ComplainHandling.ComplainItem;
-import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherDetalis;
 import com.mlpj.www.morascorpions.R;
 import com.mlpj.www.morascorpions.User;
 import com.mlpj.www.morascorpions.UserLocalStore;
@@ -104,8 +101,7 @@ public class AddNoticeActivity extends AppCompatActivity {
                     mProgressDialog.setMessage("Please wait...!");
                     mProgressDialog.show();
                     Retrofit.Builder builder = new Retrofit.Builder()
-                            //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                            .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                            .baseUrl(getString(R.string.base_url_azure))
                             .addConverterFactory(GsonConverterFactory.create());
                     Retrofit retrofit = builder.build();
 

@@ -78,8 +78,7 @@ public class ParentComplainViewFragment extends Fragment {
         mProgressDialog.show();
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mlpj.www.morascorpions.ApiClient;
@@ -48,8 +47,7 @@ public class TakeActionActivity extends AppCompatActivity {
                     mProgressDialog.show();
 
                     Retrofit.Builder builder = new Retrofit.Builder()
-                            //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                            .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                            .baseUrl(getString(R.string.base_url_azure))
                             .addConverterFactory(GsonConverterFactory.create());
                     Retrofit retrofit = builder.build();
 

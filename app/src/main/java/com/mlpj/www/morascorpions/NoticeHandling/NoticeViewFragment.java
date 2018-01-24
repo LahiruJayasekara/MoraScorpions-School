@@ -2,9 +2,7 @@ package com.mlpj.www.morascorpions.NoticeHandling;
 
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -52,8 +50,7 @@ public class NoticeViewFragment extends Fragment {
         mProgressDialog.show();
 
         Retrofit.Builder builder = new Retrofit.Builder()
-                //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                .baseUrl(getString(R.string.base_url_azure))
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
 

@@ -1,6 +1,5 @@
 package com.mlpj.www.morascorpions;
 
-//import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -19,11 +18,25 @@ import android.view.MotionEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mlpj.www.morascorpions.Attendance.ParentAttendanceViewFragment;
+import com.mlpj.www.morascorpions.Attendance.TeacherMarkAttendanceFragment;
+import com.mlpj.www.morascorpions.Chat.ParentChatFragment;
+import com.mlpj.www.morascorpions.Chat.TeacherChatFragment;
 import com.mlpj.www.morascorpions.ComplainHandling.ParentComplainViewFragment;
 import com.mlpj.www.morascorpions.ComplainHandling.PrincipalAndTeacherComplainViewFragment;
-import com.mlpj.www.morascorpions.NotesHandling.StudentNotesViewFragment;
+import com.mlpj.www.morascorpions.Home.ParentHomeFragment;
+import com.mlpj.www.morascorpions.Home.PrincipalHomeFragment;
+import com.mlpj.www.morascorpions.Home.StudentHomeFragment;
+import com.mlpj.www.morascorpions.Home.TeacherHomeFragment;
+import com.mlpj.www.morascorpions.NotesAndHwHandling.HwViewFragment;
+import com.mlpj.www.morascorpions.NotesAndHwHandling.NotesAndHwFragment;
+import com.mlpj.www.morascorpions.NotesAndHwHandling.StudentNotesViewFragment;
 import com.mlpj.www.morascorpions.NoticeHandling.NoticeViewFragment;
 import com.mlpj.www.morascorpions.NoticeHandling.PrincipalNoticeFragment;
+import com.mlpj.www.morascorpions.Notifications.NotificationService;
+import com.mlpj.www.morascorpions.Profile.ParentProfileFragment;
+import com.mlpj.www.morascorpions.Profile.StudentProfileFragment;
+import com.mlpj.www.morascorpions.Profile.TeacherProfileFragment;
 import com.mlpj.www.morascorpions.Syllabus.SyllabusViewFragment;
 import com.squareup.picasso.Picasso;
 
@@ -90,8 +103,7 @@ public class UserAreaActivity extends AppCompatActivity {
 
 
             Retrofit.Builder builder = new Retrofit.Builder()
-                    //.baseUrl(getString(R.string.base_url_localhost))       //localhost
-                    .baseUrl(getString(R.string.base_url_azure))    //remote localhost
+                    .baseUrl(getString(R.string.base_url_azure))
                     .addConverterFactory(GsonConverterFactory.create());
             Retrofit retrofit = builder.build();
 
@@ -104,7 +116,6 @@ public class UserAreaActivity extends AppCompatActivity {
                     mProgressDialog.dismiss();
                     List<ClassSubjectOfTeacher> classSubjectList = new ArrayList<>();
                     classSubjectList = response.body();
-                    //Toast.makeText(getApplicationContext(),mCurrentUser.getP_Id(),Toast.LENGTH_LONG).show();
                     for(int i = 0; i < classSubjectList.size(); i++){
                         menu1.add(Menu.NONE,classSubjectList.get(i).getId(),Menu.NONE, classSubjectList.get(i).getClassRoomName() + " " + classSubjectList.get(i).getSubjectName()).setIcon(R.drawable.ic_navigate_next);
                     }
@@ -301,6 +312,4 @@ public class UserAreaActivity extends AppCompatActivity {
             fragmentManager.beginTransaction().replace(R.id.fragmentContainer,fragment).commit();
         }
     }
-
-
 }
