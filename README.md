@@ -6,3 +6,5 @@ Notes, Notices, Homework and Complain handling, realtime chat etc were
 implemented. Developed the android application of the system.
 
 This is the code base for android application. 
+
+Final Report https://github.com/LahiruJayasekara/MoraScorpions-School/blob/master/final-Report.pdf
